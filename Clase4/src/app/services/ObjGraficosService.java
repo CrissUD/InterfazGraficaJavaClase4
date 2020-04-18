@@ -17,7 +17,7 @@ public class ObjGraficosService {
 
     private ObjGraficosService(){}
 
-    public JPanel crearJPanel(int x, int y, int ancho, int alto, Color colorFondo, Border borde){
+    public JPanel construirJPanel(int x, int y, int ancho, int alto, Color colorFondo, Border borde){
         panel = new JPanel(); 
         panel.setSize(ancho, alto);
         panel.setLocation(x, y);
@@ -27,7 +27,7 @@ public class ObjGraficosService {
         return panel;
     }
 
-    public JButton crearJButton(
+    public JButton construirJButton(
         String texto, int x, int y, int ancho, int alto, Cursor cursor, 
         ImageIcon imagen, Font fuente, Color colorFondo, Color colorFuente, 
         Border borde, String direccion, boolean esSolido){

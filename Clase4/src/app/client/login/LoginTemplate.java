@@ -40,11 +40,11 @@ public class LoginTemplate extends JFrame {
     private ImageIcon iFondo, iSvg, iLogo, iUsuario, iClave, iPunto, iFacebook, iTwitter, iYoutube, iCerrar, iDimAux;
 
     // Declaración objetos
-    private ObjGraficosService servicioObjGraficos;
+    private ObjGraficosService sObjGraficos;
 
     public LoginTemplate() {
         
-        servicioObjGraficos = ObjGraficosService.getService();
+        sObjGraficos = ObjGraficosService.getService();
 
         this.crearObjetosDecoradores();
         this.crearJPanels();
@@ -88,12 +88,12 @@ public class LoginTemplate extends JFrame {
 
     public void crearJPanels(){
 
-        pIzquierda = servicioCreacionObjGraficos.crearJPanel(
+        pIzquierda = sObjGraficos.construirJPanel(
             0, 0, 600, 500, Color.WHITE, null
         );
         this.add(pIzquierda);
 
-        pDerecha = servicioCreacionObjGraficos.crearJPanel(
+        pDerecha = sObjGraficos.construirJPanel(
             600, 0, 400, 500, Color.WHITE, null
         );
         this.add(pDerecha);
@@ -115,7 +115,7 @@ public class LoginTemplate extends JFrame {
     public void crearJButtons(){
 
 
-        bEntrar = servicioCreacionObjGraficos.crearJButton(
+        bEntrar = sObjGraficos.construirJButton(
             "Entrar", (pDerecha.getWidth() - 230) / 2, 330, 
             250, 45, cMano, null, null, colorAzul, 
             Color.WHITE, null, "c", true
