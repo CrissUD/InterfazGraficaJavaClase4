@@ -210,7 +210,7 @@ Entonces es necesario que el programador tenga en cuenta la organización en la 
 
 ## Ventajas de este enfoque
 
-Ahora nuestro código esta más organizado, cuando queramos cambiar la configuración de algún botón ya no tardaremos en encontrarlo dentro del constructor sino que ya podremos ir a nuestro método encargado de la creación de botones y cambiar lo que consideremos necesario. 
+Nuestro código esta más organizado, cuando queramos cambiar la configuración de algún botón ya no tardaremos en encontrarlo dentro del constructor, ahora podremos ir a nuestro método encargado de la creación de botones y cambiar lo que consideremos necesario. 
 
 Ademas para poder concentrarnos aun mejor en una parte de nuestro código, el editor de texto nos da la posibilidad de minimizar el código por métodos y así concentrarnos en una sola parte de este.
 
