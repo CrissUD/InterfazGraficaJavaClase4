@@ -235,7 +235,7 @@ Dentro de nuestro proyecto en el paquete raíz **app** ahora crearemos un nuevo 
   <p>Creación de paquete services y servicio para la creación de objetos gráficos.</p>
 </div>
 
-Cabe resaltar que los servicios que creemos en nuestro proyecto tendrán el nombre de la clase (arbitrario) seguido de la palabra **service**.
+Cabe resaltar que los servicios que creemos en nuestro proyecto tendrán el nombre de la clase (arbitrario) seguido de la palabra **Service**.
 
 Nuestra clase **ObjGraficosService** se encargará de la creación de los objetos gráficos a traves de métodos que podremos usar desde cualquier clase **Template** que tengamos en nuestro proyecto. Para garantizar lo anterior dicho debemos crear un mecanismo para que cualquier clase desde cualquier parte pueda llamar al objeto y pueda usar sus métodos pero a su vez **este objeto solo se cree una vez para todas las clases.**
 
@@ -271,7 +271,7 @@ Se pueden notar varias cosas del método anterior:
 * La palabra clave **static** asegura que el método dentro de este servicio pueda ser llamado desde cualquier otra clase sin necesidad de ejemplificar el objeto anteriormente. 
 * En el atributo de la clase se pone el **static** también por que las variables que se trabajen dentro de un método **static** deben serlo también.
 * El método retorna un objeto de la propia clase.
-* El **if** asegura la ejemplificación única del objeto del servicio, si este es nulo lo ejemplifica, cosa que ocurrirá la primera vez que se llame al método. Pero la segunda vez que se llame, como este objeto ya fue ejemplificado ya no entrara al if y lo retornara simplemente.
+* El **if** asegura la ejemplificación única del objeto del servicio, si este es nulo lo ejemplifica, cosa que ocurrirá la primera vez que se llame al método. Pero la segunda vez que se llame, como este objeto ya fue ejemplificado previamente ya no entrara al if y lo retornara simplemente.
 * Este método que acabamos de realizar es conocido como **Patron Singleton**.
 
 Ahora en nuestra Clase **LoginTemplate** podemos obtener su objeto llamando a este método de la siguiente manera:
@@ -296,7 +296,7 @@ Ahora veremos un acercamiento de como serán los métodos de que encapsulan la c
 
 ## JPanel 
 
-Dentro de nuestro servicio podemos empezar con la creación de paneles para esto declaramos un objeto gráfico tipo JPanel y lo configuramos dentro de un método al cual llamaremos **construirJPanel**, este recibirá por parámetros las cosas necesarias para su correcta creación.
+Dentro de nuestro servicio podemos empezar con la construcción de paneles para esto declaramos un objeto gráfico tipo JPanel y lo configuramos dentro de un método al cual llamaremos **construirJPanel**, este recibirá por parámetros las cosas necesarias para su correcta creación.
 
 ```javascript
 private JPanel panel;
@@ -313,12 +313,12 @@ public JPanel construirJPanel(int x, int y, int ancho, int alto, Color colorFond
 }
 ```
 Podemos observar que este método retorna un objeto tipo JPanel y recibe por parámetros: 
-* **Posición en x**
-* **Posición en y**
-* **Ancho**
-* **Alto**
-* **Color de Fondo**
-* **Borde**
+* **Posición en x**: recibe un entero (int).
+* **Posición en y**: recibe un entero (int).
+* **Ancho**: recibe un entero (int).
+* **Alto**: recibe un entero (int).
+* **Color de Fondo**: recibe un objeto decorador tipo Color.
+* **Borde**: recibe un objeto decorador tipo Border.
 
 Adentro se encarga de la **ejemplificación y configuración del objeto gráfico para después retornarlo** por lo que realiza 2 de las 4 etapas de la creación de un objeto gráfico, estas dos etapas las podemos generalizar en un termino que es la construcción del objeto, esta es la razón de su nombre.
 
@@ -329,11 +329,11 @@ pIzquierda = sObjGraficos.construirJPanel(0, 0, 600, 500, Color.WHITE, null);
 this.add(pIzquierda);
 ```
 
-Noten varias cosas importantes:
+Note varias cosas importantes:
 * La creación de un JPanel se redujo de 6 lineas de código a solo 2.
 <div align="center">
   <img  src="./resources/codigo7.png">
-  <p>Comparativa de creación de un JPanel.</p>
+  <p>Comparación de creación de un JPanel de forma habitual o con el servicio.</p>
 </div>
 
 * Nuestros nombres en los parámetros son muy intuitivos esto quiere decir que ya no tenemos que recordar el nombre exacto de cada método de configuración en el futuro si no que ya sabemos que debemos enviar.
@@ -359,7 +359,7 @@ Noten varias cosas importantes:
 
 ## JButton
 
-Vamos a ver como se realizaría el método para la creación genérica de un botón.
+Vamos a ver como se realizaría el método para la creación genérica de un botón. Y mostramos este en especifico por que es el método de construcción que necesite más parámetros para construir
 
 ```javascript
 public JButton construirJButton(
@@ -391,3 +391,59 @@ public JButton construirJButton(
     return button;
 }
 ```
+
+Podemos observar que el método recibe por parámetros lo siguiente: 
+
+* **texto del botón:** recibe un String..
+* **posición x:** recibe un entero (int).
+* **posición y:** recibe un entero (int).
+* **ancho:** recibe un entero (int).
+* **alto:** recibe un entero (int).
+* **cursor:** recibe un objeto decorador tipo Cursor. 
+* **imagen:** recibe un objeto decorador tipo ImageIcon. 
+* **fuente:** recibe un objeto decorador tipo Font.
+* **color de Fondo**:  recibe un objeto decorador tipo Color.
+* **color de Fuente:**  recibe un objeto decorador tipo Color.
+* **borde:** recibe un objeto decorador tipo Border.
+* **dirección:** recibe un String que representa la posición horizontal de lo que contenga el botón. Esta puede ser:
+    * "l" (left): si se desea dejar el contenido en la parte izquierda.
+    * "c" (center): si se desea dejar el contenido en el centro.
+    * "r" (right): si se desea dejar el contenido en la parte derecha.
+* **¿es Solido?:** recibe un booleano, si se manda en True dejara las propiedades de contenido de Java, si se pasa como True le quitara esas propiedades dejándolo transparente.
+
+Ahora desde nuestra clase **LoginTemplate** podemos llamar a este método para la construcción de los botones, a continuación se muestran 2 botones diferentes para ver las particularidades:
+```javascript
+bEntrar = sObjGraficos.construirJButton(
+    "Entrar", (pDerecha.getWidth() - 230) / 2, 330, 
+    250, 45, cMano, null, null, colorAzul, 
+    Color.WHITE, null, "c", true
+);
+pDerecha.add(bEntrar);
+
+iDimAux = new ImageIcon(
+    iCerrar.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
+);
+
+bCerrar = sObjGraficos.construirJButton(
+    null, 350, 10, 45, 30, 
+    cMano, iDimAux, null, 
+    null, null, null, "c", false
+);
+pDerecha.add(bCerrar);
+```
+
+Podemos observar lo siguiente en la creación de los dos anteriores botones:
+* **Primer botón:**
+    * Este botón contiene texto asi que se enviá.
+    * Va posicionado en la mitad del panel por lo que se envía el calculo pero ahora enviando el ancho del botón como numero directamente. 
+    * Tiene incorporado un cursor y se envía como argumento.
+    * Tiene color de fondo y color de fuente por lo que se envía como argumento.
+    * Su contenido esta centrado por lo que se envía una "c".
+    * Como este botón tiene color de fondo entonces es un botón solido y se envía True.
+* **Segundo botón:**
+    * Este botón no texto asi que se enviá null como argumento.
+    * Este botón contiene una imagen, pero esta debe ser previamente redimensionada para poder ser enviada. 
+    * Tiene incorporado un cursor y se envía como argumento.
+    * No contiene ningún color asi que se envía como argumentos null.
+    * Su contenido esta centrado por lo que se envía una "c".
+    * Como este botón no tiene color de fondo entonces es un botón transparente y se envía un False para conseguir esto.

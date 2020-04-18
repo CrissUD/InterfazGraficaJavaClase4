@@ -55,7 +55,6 @@ public class LoginTemplate extends JFrame {
         this.crearJCheckBoxes();
         this.crearJLabels();
         
-        
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1000, 500);
@@ -114,7 +113,6 @@ public class LoginTemplate extends JFrame {
 
     public void crearJButtons(){
 
-
         bEntrar = sObjGraficos.construirJButton(
             "Entrar", (pDerecha.getWidth() - 230) / 2, 330, 
             250, 45, cMano, null, null, colorAzul, 
@@ -126,16 +124,11 @@ public class LoginTemplate extends JFrame {
             iCerrar.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
         );
 
-        bCerrar = new JButton();
-        bCerrar.setBounds(350, 10, 45, 30);
-        bCerrar.setFocusable(false);
-        bCerrar.setBackground(Color.BLUE);
-        bCerrar.setForeground(Color.WHITE);
-        bCerrar.setCursor(cMano);
-        bCerrar.setIcon(iDimAux);
-        bCerrar.setContentAreaFilled(false);
-        bCerrar.setFocusable(false);
-        bCerrar.setBorder(null);
+        bCerrar = sObjGraficos.construirJButton(
+            null, 350, 10, 45, 30, 
+            cMano, iDimAux, null, 
+            null, null, null, "c", false
+        );
         pDerecha.add(bCerrar);
 
         bRegistrarse = new JButton("Registrarse");
