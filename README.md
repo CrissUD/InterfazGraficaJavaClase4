@@ -19,8 +19,210 @@ Curso propuesto por el grupo de trabajo Semana de Ingenio y Diseño (**SID**) de
 En nuestras anteriores clases hemos creado una clase **VistaPrincipalTemplate** y otra clase **LoginTemplate** cada una en su respectivo paquete como podemos ver a continuación:
 
 <div align="center">
-  <img  src="./resources/paquetes.png">
+  <img  src="./resources/paquetes1.png">
   <p>Clases UI en sus respectivos paquetes</p>
 </div>
 
-Ahora y por motivos de modularidad vamos a crear un paquete llamado **client** y allí vamos a dejar nuestros paquetes de las clases UI que hemos creado.
+Ahora y por motivos de modularidad vamos a crear un paquete llamado **client** y allí vamos a dejar nuestros paquetes de las clases UI que hemos creado. Nuestro archivo de ejecución App.java sigue estando ubicado en el paquete principal **app**.
+
+<div align="center">
+  <img  src="./resources/paquetes2.png">
+  <p>Creación de paquete client que contiene nuestros paquetes</p>
+</div>
+
+Recordando un poco nuestro recorrido, en nuestra primera clase habíamos creado nuestra clase **VistaPrincipalTemplate** que hasta el momento esta vacía:
+
+<div align="center">
+  <img  src="./resources/interfaz1.png">
+  <p>Vista principal creada en primera clase.</p>
+</div>
+
+anterior el resultado de nuestra anterior clase fue el siguiente:
+
+<div align="center">
+  <img  src="./resources/interfaz2.png">
+  <p>Login de usuario resultado final.</p>
+</div>
+
+# Modularización de código
+
+Ya hemos creado nuestro login de usuario que se ve muy bien, sin embargo si en algún momento queremos cambiar una configuración en alguno de los objetos gráficos creados va ser algo complicado de encontrar. Aunque nuestro código tiene algo de organización con la separación de la creación de cada uno de nuestros objetos gráficos, nuestro constructor tiene una gran cantidad de lineas de código.
+
+<div align="center">
+  <img  src="./resources/codigo1.png">
+  <p>Separación de creación de objetos gráficos dentro del constructor.</p>
+</div>
+
+
+Una buena idea para organizar nuestro código seria la creación de métodos que nos ayuden con la separación de la creación de objetos gráficos de acuerdo a sus tipos. Por ejemplo podemos crear un método llamado **crearJPanels()** e insertar la creación de todos nuestros objetos tipo JPanel  allí.
+
+```javascript
+public void crearJPanels(){
+
+    pIzquierda = new JPanel();
+    pIzquierda.setSize(600, 500);
+    pIzquierda.setLocation(0, 0);
+    pIzquierda.setBackground(Color.white);
+    pIzquierda.setLayout(null);
+    this.add(pIzquierda);
+
+    pDerecha = new JPanel();
+    pDerecha.setSize(400, 500);
+    pDerecha.setLocation(600, 0);
+    pDerecha.setBackground(Color.white);
+    pDerecha.setLayout(null);
+    this.add(pDerecha);
+}
+```
+
+Ahora por ejemplo podemos crear otro método llamado **crearJTextfields()** e insertar la creación de los objetos gráficos tipo JTextField.
+
+```javascript
+public void crearJTextFields(){
+
+    tNombreUsuario = new JTextField("Nombre Usuario");
+    tNombreUsuario.setSize(260, 40);
+    tNombreUsuario.setLocation((pDerecha.getWidth() - tNombreUsuario.getWidth()) / 2, 130);
+    tNombreUsuario.setForeground(colorAzul);
+    tNombreUsuario.setBackground(Color.WHITE);
+    tNombreUsuario.setCaretColor(colorGrisOscuro);
+    tNombreUsuario.setBorder(border);
+    tNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+    pDerecha.add(tNombreUsuario);
+}
+```
+
+otros métodos de creación necesarios para nuestra clase son:
+
+```javascript
+public void crearObjetosDecoradores(){
+    ...
+}
+```
+```javascript
+public void crearJButtons(){
+    ...
+}
+```
+```javascript
+public void crearJLabels(){
+    ...
+}
+```
+```javascript
+public void crearJPasswordFields(){
+    ...
+}
+```
+```javascript
+public void crearJComboBoxes(){
+    ...
+}
+```
+```javascript
+public void crearJCheckBoxes(){
+    ... // También se crea el objeto ButtonGroup aquí al ser un objeto auxiliar 
+}
+```
+
+Hay que aclarar varias cosas aquí:
+
+## ¿Por que es posible hacer esta modularización?
+
+Como recordaremos, la declaración de nuestros objetos gráficos la realizamos de forma global al inicio de nuestra clase, haciendo de estos objetos gráficos atributos de nuestra clase. 
+
+<div align="center">
+  <img  src="./resources/atributos.png">
+  <p>Atributos de la clase LoginTemplate.</p>
+</div>
+
+Esto permite que cualquier entorno interno (Método) dentro de nuestra clase pueda conocer cada uno de estos objetos gráficos. Por ejemplo si en un caso hipotético se realizara la declaración de los paneles dentro del método **crearJPanels()** estos objetos gráficos solo existirían dentro de ese método y cuando se quiera agregar el JTextField creado en el método **crearJTextFields()** al panel **pDerecha** saltara un error por que para ese método el panel pDerecha no existe.
+
+<div align="center">
+  <img  src="./resources/codigo2.png">
+  <p>Error al crear los paneles dentro de un solo entorno.</p>
+</div>
+
+Es por esta razón que la declaración se hace de forma global y como atributos de nuestra clase. Aunque no todos nuestros objetos gráficos tienen que ser atributos, por ejemplo un **ButtonGroup** que solo afecta a los objetos **JCheckBox** se puede crear como variable en el método **crearJCheckBoxes()** y como probablemente este objeto no se necesite para nada más en el futuro se podría tratar como una variable dentro de este método. El programador debe elegir cual de los objetos gráficos y objetos Decoradores necesita declarar globalmente o como variable dentro de un entorno.  Sin embargo nunca se sabe cuando se podría necesitar alguno de estos en otro contexto así que como preferencia personal es preferible mantener todos los objetos gráficos y los objetos Decoradores como atributos.
+
+## Ejecución de métodos de creación desde el constructor
+
+Si ya hemos pasado todos nuestros objetos gráficos y objetos Decoradores a sus respectivos métodos nuestro constructor se vera ahora así: 
+
+<div align="center">
+  <img  src="./resources/codigo3.png">
+  <p>Constructor después de hacer los métodos de creación.</p>
+</div>
+
+Se puede notar que lo único que esta dentro de nuestro constructor es la configuración de nuestra ventana. Si corremos nuestra aplicación notamos que no se vera nada. 
+
+<div align="center">
+  <img  src="./resources/interfaz3.png">
+  <p>Login de usuario después de hacer los métodos de creación.</p>
+</div>
+
+Esto es por que tenemos que llamar desde el constructor nuestros métodos de creación. Por ejemplo al llamar estos métodos de creación : 
+
+<div align="center">
+  <img  src="./resources/codigo4.png">
+  <p>Constructor después de hacer los métodos de creación.</p>
+</div>
+
+nuestra aplicación se vera así. 
+
+<div align="center">
+  <img  src="./resources/interfaz4.png">
+  <p>Login de usuario con la llamada de algunos métodos de creación.</p>
+</div>
+
+Entonces es necesario llamar a todos estos métodos dentro del constructor.
+
+## Organización en el eje Z y de métodos de creación
+
+Tenemos que tener en cuenta la organización de los objetos con respecto al eje z como se discutió en la clase anterior. Eso quiere decir que hay que tener cuidado en el orden en que vamos a llamar los métodos. Por ejemplo:
+* Si llamamos el método **crearJTextFields()** antes del método **crearJPanels()** ocurrirá un error por que no es posible añadir un objeto gráfico a un panel que aun no se ha creado.
+
+<div align="center">
+  <img  src="./resources/error1.png">
+  <p>Error por que no se ha creado los JPanel previamente.</p>
+</div>
+
+* Si llamamos el método **crearObjetosDecoradores()** después de llamar cualquier otro método que crea objetos gráficos en los que se incorpora objetos decoradores ocurrirá un error.
+
+<div align="center">
+  <img  src="./resources/error2.png">
+  <p>Error por que no se ha creado los objetos decoradores previamente.</p>
+</div>
+
+* Si llamamos el método **crearJLabels()** antes de llamar el método de **crearJButtons()** el fondo del login tapara los botones en el panel **pIzquierda**.
+
+<div align="center">
+  <img  src="./resources/interfaz5.png">
+  <p>Los botones del panel pIzquierda no se ven por que están tapados por el fondo.</p>
+</div>
+
+Entonces es necesario que el programador tenga en cuenta la organización en la llamada de los métodos de creación. Una organización apropiada para nuestro caso puede ser:
+
+<div align="center">
+  <img  src="./resources/codigo5.png">
+  <p>Organización correcta en la llamada de los métodos de creación.</p>
+</div>
+
+## Ventajas de este enfoque
+
+Ahora nuestro código esta más organizado, cuando queramos cambiar la configuración de algún botón ya no tardaremos en encontrarlo dentro del constructor sino que ya podremos ir a nuestro método encargado de la creación de botones y cambiar lo que consideremos necesario. 
+
+Ademas para hacer aun mas fácil el enfoque a una parte de nuestro código, el editor de texto nos da la posibilidad de minimizar el código por métodos y así concentrarnos en una sola parte de este.
+
+<div align="center">
+  <img  src="./resources/codigo6.png">
+  <p>Minimización de código por métodos.</p>
+</div>
+
+
+# Optimización de código
+
+Ya aprendimos la forma de como crear nuestros objetos gráficos para mostrarlos en pantalla y como crear objetos decoradores para incorporarlos en ellos. Sin embargo son muchas las configuraciones que hay que aprender y es mucho el código que se extiende en nuestras clases para la creación de estos objetos gráficos. Si nuestra interfaz Gráfica de usuario tiene 20 botones por ejemplo debemos realizar el proceso de creación 20 veces y no solo gasta tiempo sino que requiere la memorización de muchas configuraciones y nuestro codigo se hará más y más largo.
+
+Una alternativa a esto es la creación de una clase que se encargue de proporcionarnos un servicio, este servicio sera el de la creación de nuestros objetos gráficos de forma genérica de tal forma que para crear uno de nuestros objetos solo tengamos que llamar al servicio y este nos retorne el objeto. Vamos a ver de que se trata.
+
