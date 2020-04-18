@@ -7,7 +7,6 @@ import java.awt.Cursor;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -100,14 +99,10 @@ public class LoginTemplate extends JFrame {
 
     public void crearJTextFields(){
 
-        tNombreUsuario = new JTextField("Nombre Usuario");
-        tNombreUsuario.setSize(260, 40);
-        tNombreUsuario.setLocation((pDerecha.getWidth() - tNombreUsuario.getWidth()) / 2, 130);
-        tNombreUsuario.setForeground(colorAzul);
-        tNombreUsuario.setBackground(Color.WHITE);
-        tNombreUsuario.setCaretColor(colorGrisOscuro);
-        tNombreUsuario.setBorder(border);
-        tNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+        tNombreUsuario = sObjGraficos.construirJTextField(
+            "Nombre Usuario", (pDerecha.getWidth() - 260) / 2, 130, 260, 40, 
+            Color.WHITE, colorAzul, colorGrisOscuro, null, border, "c"
+        );
         pDerecha.add(tNombreUsuario);
     }
 
@@ -125,49 +120,37 @@ public class LoginTemplate extends JFrame {
         );
 
         bCerrar = sObjGraficos.construirJButton(
-            null, 350, 10, 45, 30, 
-            cMano, iDimAux, null, 
+            null, 350, 10, 45, 30, cMano, iDimAux, null, 
             null, null, null, "c", false
         );
         pDerecha.add(bCerrar);
 
-        bRegistrarse = new JButton("Registrarse");
-        bRegistrarse.setBounds(240, 460, 145, 35);
-        bRegistrarse.setFocusable(false);
-        bRegistrarse.setBackground(colorAzul);
-        bRegistrarse.setForeground(Color.WHITE);
-        bRegistrarse.setCursor(cMano);
+        bRegistrarse = sObjGraficos.construirJButton(
+            "Registrarse", 240, 460, 145, 35, cMano, null, 
+            null, colorAzul, Color.WHITE, null, "c", true
+        );
         pDerecha.add(bRegistrarse);
 
         iDimAux = new ImageIcon(
             iPunto.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)
         );
 
-        bOpcion1 = new JButton();
-        bOpcion1.setBounds(10, 220, 30, 20);
-        bOpcion1.setCursor(cMano);
-        bOpcion1.setIcon(iDimAux);
-        bOpcion1.setContentAreaFilled(false);
-        bOpcion1.setFocusable(false);
-        bOpcion1.setBorder(null);
+        bOpcion1 = sObjGraficos.construirJButton(
+            null, 10, 220, 30, 20, cMano, iDimAux, null,
+            null, null, null, "c", false
+        );
         pIzquierda.add(bOpcion1);
 
-        bOpcion2 = new JButton();
-        bOpcion2.setBounds(10, 250, 30, 20);
-        bOpcion2.setCursor(cMano);
-        bOpcion2.setIcon(iDimAux);
-        bOpcion2.setContentAreaFilled(false);
-        bOpcion2.setFocusable(false);
-        bOpcion2.setBorder(null);
+        bOpcion2 = sObjGraficos.construirJButton(
+            null, 10, 250, 30, 20, cMano, iDimAux, null,
+            null, null, null, "c", false
+        );
         pIzquierda.add(bOpcion2);
 
-        bOpcion3 = new JButton();
-        bOpcion3.setBounds(10, 280, 30, 20);
-        bOpcion3.setCursor(cMano);
-        bOpcion3.setIcon(iDimAux);
-        bOpcion3.setContentAreaFilled(false);
-        bOpcion3.setFocusable(false);
-        bOpcion3.setBorder(null);
+        bOpcion3 = sObjGraficos.construirJButton(
+            null, 10, 280, 30, 20, cMano, iDimAux, null,
+            null, null, null, "c", false
+        );
         pIzquierda.add(bOpcion3);
     }
 
@@ -177,146 +160,110 @@ public class LoginTemplate extends JFrame {
             iLogo.getImage().getScaledInstance(40, 40, Image.SCALE_AREA_AVERAGING)
         );
 
-        lLogo = new JLabel();
-        lLogo.setBounds(50, 20, 40, 40);
-        lLogo.setIcon(iDimAux);
+        lLogo= sObjGraficos.construirJLabel(null, 50, 20, 40, 40, iDimAux, null, null, null);
         pIzquierda.add(lLogo);
 
-        lTituloApp = new JLabel("Login de Usuario");
-        lTituloApp.setBounds(100, 20, 220, 30);
-        lTituloApp.setForeground(Color.WHITE);
-        lTituloApp.setFont(fontTPrincipal);
+        lTituloApp = sObjGraficos.construirJLabel(
+            "Login de Usuario", 100, 20, 220, 30, null, Color.WHITE, null, fontTPrincipal
+        );
         pIzquierda.add(lTituloApp);
 
         iDimAux = new ImageIcon(
             iSvg.getImage().getScaledInstance(500, 345, Image.SCALE_AREA_AVERAGING)
         );
 
-        lSvg = new JLabel();
-        lSvg.setBounds(100, 100, 500, 345);
-        lSvg.setIcon(iDimAux);
+        lSvg= sObjGraficos.construirJLabel(null, 100, 100, 500, 345, iDimAux, null, null, null);
         pIzquierda.add(lSvg);
 
-        lEslogan = new JLabel("Te ayudamos en todo");
-        lEslogan.setSize(130, 20);
-        lEslogan.setLocation((pDerecha.getWidth() - lEslogan.getWidth()) / 2, 60);
-        lEslogan.setHorizontalAlignment(SwingConstants.CENTER);
-        lEslogan.setForeground(colorGrisOscuro);
-        lEslogan.setFont(fontSubtitulo);
+        lEslogan = sObjGraficos.construirJLabel(
+            "Te ayudamos en todo", (pDerecha.getWidth() - 130) / 2, 60, 130, 20, 
+            null, colorGrisOscuro, null, fontSubtitulo
+        );
         pDerecha.add(lEslogan);
 
-        lTituloLogin = new JLabel("Registra tus Datos");
-        lTituloLogin.setSize(150, 30);
-        lTituloLogin.setLocation((pDerecha.getWidth() - lTituloLogin.getWidth()) / 2, 80);
-        lTituloLogin.setForeground(colorGrisOscuro);
-        lTituloLogin.setFont(fontTitulo);
-        lTituloLogin.setHorizontalAlignment(SwingConstants.CENTER);
+        lTituloLogin = sObjGraficos.construirJLabel(
+            "Registra tus Datos", (pDerecha.getWidth() - 150) / 2, 80, 150, 30, 
+            null, colorGrisOscuro, null, fontTitulo
+        );
         pDerecha.add(lTituloLogin);
 
-        lNotificaciones = new JLabel("¿Recibir Notificaciones?");
-        lNotificaciones.setSize(140, 20);
-        lNotificaciones.setLocation((pDerecha.getWidth() - lNotificaciones.getWidth()) / 2, 400);
-        lNotificaciones.setForeground(colorGrisOscuro);
-        lNotificaciones.setFont(fontSubtitulo);
-        lNotificaciones.setHorizontalAlignment(SwingConstants.CENTER);
+        lNotificaciones = sObjGraficos.construirJLabel(
+            "¿Recibir Notificaciones?", (pDerecha.getWidth() - 140) / 2, 400, 140, 20, 
+            null, colorGrisOscuro, null, fontSubtitulo
+        );
         pDerecha.add(lNotificaciones);
 
         iDimAux = new ImageIcon(
             iUsuario.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
         );
 
-        lUsuario = new JLabel();
-        lUsuario.setBounds(40, 140, 30, 30);
-        lUsuario.setIcon(iDimAux);
+        lUsuario= sObjGraficos.construirJLabel(null, 40, 140, 30, 30, iDimAux, null, null, null);
         pDerecha.add(lUsuario);
 
         iDimAux = new ImageIcon(
             iClave.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
         );
 
-        lClave = new JLabel();
-        lClave.setBounds(40, 270, 30, 30);
-        lClave.setIcon(iDimAux);
+        lClave= sObjGraficos.construirJLabel(null, 40, 270, 30, 30, iDimAux, null, null, null);
         pDerecha.add(lClave);
 
         iDimAux = new ImageIcon(
             iFacebook.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
         );
 
-        lFacebook = new JLabel();
-        lFacebook.setBounds(20, 460, 30, 30);
-        lFacebook.setIcon(iDimAux);
+        lFacebook= sObjGraficos.construirJLabel(null, 20, 460, 30, 30, iDimAux, null, null, null);
         pIzquierda.add(lFacebook);
 
         iDimAux = new ImageIcon(
             iTwitter.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
         );
 
-        lTwitter = new JLabel();
-        lTwitter.setBounds(60, 460, 30, 30);
-        lTwitter.setIcon(iDimAux);
+        lTwitter= sObjGraficos.construirJLabel(null, 60, 460, 30, 30, iDimAux, null, null, null);
         pIzquierda.add(lTwitter);
 
         iDimAux = new ImageIcon(
             iYoutube.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
         );
 
-        lYoutube = new JLabel();
-        lYoutube.setBounds(100, 460, 30, 30);
-        lYoutube.setIcon(iDimAux);
+        lYoutube= sObjGraficos.construirJLabel(null, 100, 460, 30, 30, iDimAux, null, null, null);
         pIzquierda.add(lYoutube);
 
         iDimAux = new ImageIcon(
             iFondo.getImage().getScaledInstance(600, 600, Image.SCALE_AREA_AVERAGING)
         );
 
-        lFondo = new JLabel();
-        lFondo.setBounds(0, 0, 600, 600);
-        lFondo.setIcon(iDimAux);
+        lFondo= sObjGraficos.construirJLabel(null, 0, 0, 600, 600, iDimAux, null, null, null);
         pIzquierda.add(lFondo);
     }
 
     public void crearJPasswordFields(){
-        tClaveUsuario = new JPasswordField("clave Usuario");
-        tClaveUsuario.setSize(260, 40);
-        tClaveUsuario.setLocation((pDerecha.getWidth() - tClaveUsuario.getWidth()) / 2, 260);
-        tClaveUsuario.setForeground(colorAzul);
-        tClaveUsuario.setCaretColor(colorGrisOscuro);
-        tClaveUsuario.setBorder(border);
-        tClaveUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+
+        tClaveUsuario = sObjGraficos.construirJPasswordField(
+            "clave Usuario", (pDerecha.getWidth() - 260) / 2, 260, 260, 40, 
+            null, colorAzul, colorGrisOscuro, null, border, "c"
+        );
         pDerecha.add(tClaveUsuario);
     }
 
     public void crearJComboBoxes(){
 
-        cbTipoUsuario = new JComboBox();
-        cbTipoUsuario.addItem("Cliente");
-        cbTipoUsuario.addItem("Cajero");
-        cbTipoUsuario.addItem("Administrador");
-        cbTipoUsuario.setSize(220, 30);
-        cbTipoUsuario.setLocation((pDerecha.getWidth() - cbTipoUsuario.getWidth()) / 2, 210);
-        cbTipoUsuario.setForeground(colorAzul);
-        cbTipoUsuario.setBackground(Color.WHITE);
-        ((JLabel) cbTipoUsuario.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        cbTipoUsuario = sObjGraficos.construirJComboBox(
+            "Cliente_Cajero_Administrador", (pDerecha.getWidth() - 220) / 2, 210, 220, 30, 
+            Color.WHITE, colorAzul, "c"
+        );
         pDerecha.add(cbTipoUsuario);
     }
 
     public void crearJCheckBoxes(){
 
-        checkSi = new JCheckBox("Si");
-        checkSi.setSize(45, 25);
-        checkSi.setFocusable(false);
-        checkSi.setBackground(Color.WHITE);
-        checkSi.setLocation((pDerecha.getWidth() - checkSi.getWidth()) / 2 - 15, 375);
-        checkSi.setCursor(cMano);
+        checkSi = sObjGraficos.construirJCheckBox(
+            "Si", (pDerecha.getWidth() - 45) / 2 - 15, 375, 45, 25, cMano, null, null
+        );
         pDerecha.add(checkSi);
 
-        checkNo = new JCheckBox("No");
-        checkNo.setSize(45, 25);
-        checkNo.setFocusable(false);
-        checkNo.setBackground(Color.WHITE);
-        checkNo.setLocation((pDerecha.getWidth() + checkNo.getWidth()) / 2 - 15, 375);
-        checkNo.setCursor(cMano);
+        checkNo = sObjGraficos.construirJCheckBox(
+            "No", (pDerecha.getWidth() + 45) / 2 - 15, 375, 45, 25, cMano, null, null
+        );
         pDerecha.add(checkNo);
 
         grupo = new ButtonGroup();

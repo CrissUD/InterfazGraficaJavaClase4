@@ -359,14 +359,13 @@ Note varias cosas importantes:
 
 ## JButton
 
-Vamos a ver como se realizaría el método para la creación genérica de un botón. Y mostramos este en especifico por que es el método de construcción que necesite más parámetros para construir
+Vamos a ver como se realizaría el método para la construcción genérica de un botón. Y mostramos este método en especifico por que es el método de construcción que necesita más parámetros para construir
 
 ```javascript
 public JButton construirJButton(
-    String texto, int x, int y, int ancho, int alto, Cursor cursor, 
-    ImageIcon imagen, Font fuente, Color colorFondo, Color colorFuente, 
-    Border borde, String direccion, boolean esSolido){
-        
+    String texto, int x, int y, int ancho, int alto, Cursor cursor, ImageIcon imagen, Font fuente, 
+    Color colorFondo, Color colorFuente, Border borde, String direccion, boolean esSolido
+){        
     button= new JButton(texto);
     button.setSize(ancho, alto);
     button.setLocation(x, y);
@@ -394,7 +393,7 @@ public JButton construirJButton(
 
 Podemos observar que el método recibe por parámetros lo siguiente: 
 
-* **texto del botón:** recibe un String..
+* **texto del botón:** recibe un String.
 * **posición x:** recibe un entero (int).
 * **posición y:** recibe un entero (int).
 * **ancho:** recibe un entero (int).
@@ -409,7 +408,7 @@ Podemos observar que el método recibe por parámetros lo siguiente:
     * "l" (left): si se desea dejar el contenido en la parte izquierda.
     * "c" (center): si se desea dejar el contenido en el centro.
     * "r" (right): si se desea dejar el contenido en la parte derecha.
-* **¿es Solido?:** recibe un booleano, si se manda en True dejara las propiedades de contenido de Java, si se pasa como True le quitara esas propiedades dejándolo transparente.
+* **¿es Solido?:** recibe un booleano, si se manda en True dejara las propiedades de contenido de Java, si se pasa como False le quitara esas propiedades dejándolo transparente.
 
 Ahora desde nuestra clase **LoginTemplate** podemos llamar a este método para la construcción de los botones, a continuación se muestran 2 botones diferentes para ver las particularidades:
 ```javascript
@@ -425,8 +424,7 @@ iDimAux = new ImageIcon(
 );
 
 bCerrar = sObjGraficos.construirJButton(
-    null, 350, 10, 45, 30, 
-    cMano, iDimAux, null, 
+    null, 350, 10, 45, 30, cMano, iDimAux, null, 
     null, null, null, "c", false
 );
 pDerecha.add(bCerrar);
@@ -441,9 +439,13 @@ Podemos observar lo siguiente en la creación de los dos anteriores botones:
     * Su contenido esta centrado por lo que se envía una "c".
     * Como este botón tiene color de fondo entonces es un botón solido y se envía True.
 * **Segundo botón:**
-    * Este botón no texto asi que se enviá null como argumento.
-    * Este botón contiene una imagen, pero esta debe ser previamente redimensionada para poder ser enviada. 
+    * Este botón no tiene texto asi que se enviá null como argumento.
+    * Este botón contiene una imagen, pero esta debe ser previamente redimensionada para que al enviarse quede como queremos. 
     * Tiene incorporado un cursor y se envía como argumento.
     * No contiene ningún color asi que se envía como argumentos null.
     * Su contenido esta centrado por lo que se envía una "c".
     * Como este botón no tiene color de fondo entonces es un botón transparente y se envía un False para conseguir esto.
+
+
+    El resto de métodos de nuestro servicio esta contenido dentro de nuestro repositorio, puede observar todo el código  entrando a la carpeta **Clase4** luego a la carpeta **src/app** seguido de la carpeta **services** y entrando a la clase **objGraficosservice.java**. Allí usted podrá copiar los métodos que hacen falta y empezar a implementarla desde la clase **LoginTemplate** para la optimización del código. 
+     
