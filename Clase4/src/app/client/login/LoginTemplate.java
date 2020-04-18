@@ -1,5 +1,7 @@
 package app.client.login;
 
+import app.services.ObjGraficosService;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JPanel;
@@ -37,8 +39,13 @@ public class LoginTemplate extends JFrame {
     private Border border;
     private ImageIcon iFondo, iSvg, iLogo, iUsuario, iClave, iPunto, iFacebook, iTwitter, iYoutube, iCerrar, iDimAux;
 
+    // Declaración objetos
+    private ObjGraficosService servicioObjGraficos;
+
     public LoginTemplate() {
         
+        servicioObjGraficos = ObjGraficosService.getService();
+
         this.crearObjetosDecoradores();
         this.crearJPanels();
         this.crearJTextFields();
@@ -81,18 +88,14 @@ public class LoginTemplate extends JFrame {
 
     public void crearJPanels(){
 
-        pIzquierda = new JPanel();
-        pIzquierda.setSize(600, 500);
-        pIzquierda.setLocation(0, 0);
-        pIzquierda.setBackground(Color.white);
-        pIzquierda.setLayout(null);
+        pIzquierda = servicioCreacionObjGraficos.crearJPanel(
+            0, 0, 600, 500, Color.WHITE, null
+        );
         this.add(pIzquierda);
 
-        pDerecha = new JPanel();
-        pDerecha.setSize(400, 500);
-        pDerecha.setLocation(600, 0);
-        pDerecha.setBackground(Color.white);
-        pDerecha.setLayout(null);
+        pDerecha = servicioCreacionObjGraficos.crearJPanel(
+            600, 0, 400, 500, Color.WHITE, null
+        );
         this.add(pDerecha);
     }
 
@@ -111,13 +114,12 @@ public class LoginTemplate extends JFrame {
 
     public void crearJButtons(){
 
-        bEntrar = new JButton("Entrar");
-        bEntrar.setSize(250, 45);
-        bEntrar.setLocation((pDerecha.getWidth() - bEntrar.getWidth()) / 2, 330);
-        bEntrar.setFocusable(false);
-        bEntrar.setBackground(colorAzul);
-        bEntrar.setForeground(Color.WHITE);
-        bEntrar.setCursor(cMano);
+
+        bEntrar = servicioCreacionObjGraficos.crearJButton(
+            "Entrar", (pDerecha.getWidth() - 230) / 2, 330, 
+            250, 45, cMano, null, null, colorAzul, 
+            Color.WHITE, null, "c", true
+        );
         pDerecha.add(bEntrar);
 
         iDimAux = new ImageIcon(

@@ -6,7 +6,7 @@ Curso propuesto por el grupo de trabajo Semana de Ingenio y Diseño (**SID**) de
 
 **Cristian Felipe Patiño Cáceres** - Estudiante de Ingeniería de Sistemas de la Universidad Distrital Francisco Jose de Caldas
 
-# Clase 3
+# Clase 4
 
 ## Objetivos
 
@@ -27,7 +27,7 @@ Ahora y por motivos de modularidad vamos a crear un paquete llamado **client** y
 
 <div align="center">
   <img  src="./resources/paquetes2.png">
-  <p>Creación de paquete client que contiene nuestros paquetes</p>
+  <p>Creación de paquete client que contiene nuestros paquetes creados previamente</p>
 </div>
 
 Recordando un poco nuestro recorrido, en nuestra primera clase habíamos creado nuestra clase **VistaPrincipalTemplate** que hasta el momento esta vacía:
@@ -37,7 +37,7 @@ Recordando un poco nuestro recorrido, en nuestra primera clase habíamos creado 
   <p>Vista principal creada en primera clase.</p>
 </div>
 
-anterior el resultado de nuestra anterior clase fue el siguiente:
+También creamos nuestra clase **LoginTemplate** y el resultado de nuestra anterior clase fue el siguiente:
 
 <div align="center">
   <img  src="./resources/interfaz2.png">
@@ -129,7 +129,7 @@ Hay que aclarar varias cosas aquí:
 
 ## ¿Por que es posible hacer esta modularización?
 
-Como recordaremos, la declaración de nuestros objetos gráficos la realizamos de forma global al inicio de nuestra clase, haciendo de estos objetos gráficos atributos de nuestra clase. 
+Como recordaremos, la declaración de nuestros objetos gráficos y objetos decoradores la realizamos de forma global al inicio de nuestra clase, haciendo de estos objetos gráficos atributos de nuestra clase. 
 
 <div align="center">
   <img  src="./resources/atributos.png">
@@ -226,3 +226,162 @@ Ya aprendimos la forma de como crear nuestros objetos gráficos para mostrarlos 
 
 Una alternativa a esto es la creación de una clase que se encargue de proporcionarnos un servicio, este servicio sera el de la creación de nuestros objetos gráficos de forma genérica de tal forma que para crear uno de nuestros objetos solo tengamos que llamar al servicio y este nos retorne el objeto. Vamos a ver de que se trata.
 
+**Nota**: Antes de continuar vamos a ver que se tratara con un tema relacionado a los servicios, esta clase no tiene como finalidad explicar que son los servicios asi que solo se dará una breve explicación de ellos a medida que se avanza, sin embargo en clases posteriores nos enfocaremos en su concepto y finalidad.
+
+Dentro de nuestro proyecto en el paquete raíz **app** ahora crearemos un nuevo paquete al cual llamaremos **services** y dentro crearemos una clase llamada **CreacionObjGraficosService**.
+
+<div align="center">
+  <img  src="./resources/paquetes3.png">
+  <p>Creación de paquete services y servicio para la creación de objetos gráficos.</p>
+</div>
+
+Nuestra clase **CreacionObjGraficosService** se encargará de la creación de los objetos gráficos a traves de métodos que podremos usar desde cualquier clase **Template** que tengamos en nuestro proyecto. Para garantizar lo anterior dicho debemos crear un mecanismo para que cualquier clase desde cualquier parte pueda llamar al objeto y pueda usar sus métodos pero a su vez este objeto solo se cree una vez para todas las clases.
+
+## Singleton 
+
+Es importante que este servicio se cree una vez en memoria y solo una vez por que va a ser un objeto usado en todas las clases **template** que creemos y si nuestro proyecto tiene 30 clases y si cada clase crea un objeto de este servicio estamos creando 29 objetos de más innecesarios que consumirán recursos. 
+
+Lo primero que haremos es crear su constructor pero con un tipo de acceso privado
+
+```javascript
+private CreacionObjGraficosService(){
+        
+}
+```
+Esto garantiza que no se pueda ejemplificar el objeto desde ninguna otra clase (es decir no se puede hacer  **.. = new CreacionObjGraficosService()**).
+
+Dentro de la misma clase **CreacionObjGraficosService** vamos a crear un objeto **static** de tipo de la misma clase:
+```javascript
+static private CreacionObjGraficosService servicio;
+```
+
+Ahora realizaremos un método **static** para crear el objeto de este servicio y retornarlo a quien lo necesite.
+
+```javascript
+public static CreacionObjGraficosService devolverServicio(){
+    if(servicio == null){
+        servicio = new CreacionObjGraficosService();
+    }
+    return servicio;
+}
+```
+Se pueden notar varias cosas del método anterior:
+* La palabra clave **static** asegura que el método dentro de este servicio pueda ser llamado desde cualquier otra clase sin necesidad de ejemplificar el objeto anteriormente. En el atributo se pone el **static** por que las variables que se trabajen dentro de un método **static** deben serlo también.
+* El **if** asegura la ejemplificación única del objeto del servicio, si este es nulo lo instancia, cosa que ocurrirá la primera vez que se llame al método. Pero la segunda vez que se llame como este objeto ya fue ejemplificado ya no entrara al if y lo retornara.
+* Este método que acabamos de realizar es conocido como **Patron Singleton**
+
+Ahora en nuestra Clase **LoginTemplate** podemos obtener su objeto llamando a este método de la siguiente manera:
+* Primero se importa el servicio
+```javascript
+import app.services.CreacionObjGraficosService;
+```
+* Se declara el objeto:
+```javascript
+private CreacionObjGraficosService servicioCreacionObjGraficos;
+```
+* Se obtiene su ejemplificacíon dentro del constructor (Esta sera la primera linea de código en el)
+```javascript
+servicioCreacionObjGraficos = CreacionObjGraficosService.devolverServicio();
+```
+
+Como esta es la primera clase que llama a este método el objeto del servicio se ejemplificará, pero mas adelante cuando otra clase **template** realice el mismo proceso obtendrá el objeto que ya se había ejemplificado previamente.
+
+Ahora veremos un acercamiento de como serán los métodos de creación:
+
+## JPanel 
+
+Dentro de nuestro servicio podemos empezar con la creación de paneles para esto declaramos un objeto gráfico tipo JPanel y lo configuramos dentro de un método al cual llamaremos **CrearJPanel**, este recibirá por parámetros las cosas necesarias para su correcta creación.
+
+```javascript
+private JPanel panel;
+```
+```javascript
+public JPanel crearJPanel(int x, int y, int ancho, int alto, Color colorFondo, Border borde){
+    panel = new JPanel(); 
+    panel.setSize(ancho, alto);
+    panel.setLocation(x, y);
+    panel.setLayout(null);
+    panel.setBackground(colorFondo);
+    panel.setBorder(borde);
+    return panel;
+}
+```
+Podemos observar que este método retorna un objeto tipo JPanel y recibe por parámetros: 
+* **Posición en x**
+* **Posición en y**
+* **Ancho**
+* **Alto**
+* **Color de Fondo**
+* **Borde**
+
+Y adentro se encarga de la **ejemplificación y configuración del objeto gráfico para después retornarlo** por lo que en realidad solo realiza 2 de las 4 etapas de la creación de un objeto gráfico sin embargo un nombre como **ejemplificarYConfigurarJPanel()** queda demasiado largo y nosotros ya entendemos que esta realizando realmente.
+
+Ahora desde nuestra clase **LoginTemplate** podemos llamar a este método buscando un panel dentro del método encargado de la creación de paneles y poner:
+
+```javascript
+pIzquierda = servicioCreacionObjGraficos.crearJPanel(0, 0, 600, 500, Color.WHITE, null);
+this.add(pIzquierda);
+```
+
+Noten varias cosas importantes:
+* La creación de un JPanel se redujo de 6 lineas de código a solo 2.
+<div align="center">
+  <img  src="./resources/codigo7.png">
+  <p>Comparativa de creación de un JPanel.</p>
+</div>
+
+* Nuestros nombres en los parámetros son muy intuitivos esto quiere decir que ya no tenemos que recordar el nombre exacto de cada método de configuración en el futuro si no que ya sabemos que debemos enviar.
+<div align="center">
+  <img  src="./resources/codigo8.png">
+  <p>Parámetros intuitivos en la creación de nuestros objetos gráficos.</p>
+</div>
+
+* Si un objeto gráfico no contiene alguna propiedad que se pide en el método como es el ejemplo de un borde para nuestro panel simplemente se envía el argumento como **null**. 
+
+<div align="center">
+  <img  src="./resources/codigo9.png">
+  <p>Argumento de borde enviado como null ya que no se requiere en el panel.</p>
+</div>
+
+* Si considera que el código ocupa mucho espacio de forma horizontal puede acomodarlo a su preferencia:
+
+<div align="center">
+  <img  src="./resources/codigo10.png">
+  <p>Otras formas de formatos del código.</p>
+</div>
+
+
+## JButton
+
+Vamos a ver como se realizaría el método para la creación genérica de un botón.
+
+```javascript
+public JButton crearJButton(
+    String texto, int x, int y, int ancho, int alto, Cursor cursor, 
+    ImageIcon imagen, Font fuente, Color colorFondo, Color colorFuente, 
+    Border borde, String direccion, boolean esSolido){
+        
+    button= new JButton(texto);
+    button.setSize(ancho, alto);
+    button.setLocation(x, y);
+    button.setFocusable(false);
+    button.setCursor(cursor);
+    button.setFont(fuente);
+    button.setBackground(colorFondo);
+    button.setForeground(colorFuente);
+    button.setIcon(imagen);
+    button.setBorder(borde);
+    button.setContentAreaFilled(esSolido);
+    switch(direccion){
+        case "l":
+            button.setHorizontalAlignment(SwingConstants.LEFT);
+            break;
+        case "r":
+            button.setHorizontalAlignment(SwingConstants.RIGHT);
+            break;    
+        default:
+            break;
+    }
+    return button;
+}
+```
