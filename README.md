@@ -11,7 +11,7 @@ Curso propuesto por el grupo de trabajo Semana de Ingenio y Diseño (**SID**) de
 ## Objetivos
 
 - Reconocer la forma de Añadir modularidad a nuestro código en las clases **Template** separando la creación de objetos gráficos.
-- Optimizar el código con el uso de un servicio que encapsula el funcionamiento de la creación de objetos gráficos.
+- Optimizar el código con el uso de un servicio que encapsula el funcionamiento de la construcción de objetos gráficos.
 - Optimizar los recursos de nuestra aplicación con el uso de un servicio que administre los objetos que pueden ser utilizados en diferentes clases.
 
 # Antes de comenzar
@@ -224,7 +224,7 @@ Ademas para poder concentrarnos aun mejor en una parte de nuestro código, el ed
 
 Ya aprendimos la forma de como crear nuestros objetos gráficos para mostrarlos en pantalla y como crear objetos decoradores para incorporarlos en ellos. Sin embargo son muchas las configuraciones que hay que aprender y es mucho el código que se extiende en nuestras clases para la creación de estos objetos gráficos. Si nuestra interfaz Gráfica de usuario tiene 20 botones por ejemplo debemos realizar el proceso de creación 20 veces y no solo gasta tiempo sino que requiere la memorización de muchas configuraciones y nuestro codigo se hará más y más largo.
 
-Una alternativa a esto es la creación de una clase que se encargue de proporcionarnos un servicio, este servicio sera el de la creación de los objetos gráficos de forma genérica de tal forma que para crear uno de estos objetos solo tengamos que llamar al servicio y este nos lo retorne. Vamos a explicar de que se trata.
+Una alternativa a esto es la creación de una clase que se encargue de proporcionarnos un servicio, este servicio sera el de la construcción de los objetos gráficos de forma genérica de tal forma que para crear uno de estos objetos solo tengamos que llamar al servicio y este nos lo retorne. Vamos a explicar de que se trata.
 
 **Nota**: *Antes de continuar vamos a ver que se tratara con un tema relacionado a los servicios, esta clase no tiene como finalidad explicar que son los servicios asi que solo se dará una breve explicación de ellos a medida que se avanza, sin embargo en clases posteriores nos enfocaremos en su concepto y finalidad.*
 
