@@ -1,23 +1,24 @@
 package app.client.login;
 
 import app.services.ObjGraficosService;
+import app.services.RecursosService;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
 
 public class LoginTemplate extends JFrame {
     // Declaración Objetos Gráficos
@@ -32,18 +33,17 @@ public class LoginTemplate extends JFrame {
     private ButtonGroup grupo;
 
     // Declaración objetos Decoradores
-    private Color colorAzul, colorGrisOscuro;
-    private Font fontTPrincipal, fontTitulo, fontSubtitulo;
-    private Cursor cMano;
-    private Border border;
-    private ImageIcon iFondo, iSvg, iLogo, iUsuario, iClave, iPunto, iFacebook, iTwitter, iYoutube, iCerrar, iDimAux;
+    
+    private ImageIcon iFondo, iSvg, iLogo, iUsuario, iClave, iPunto, iFacebook, iTwitter, iYoutube, iDimAux;
 
-    // Declaración objetos
+    // Declaración servicios
     private ObjGraficosService sObjGraficos;
+    private RecursosService sRecursos;
 
     public LoginTemplate() {
         
         sObjGraficos = ObjGraficosService.getService();
+        sRecursos = RecursosService.getService();
 
         this.crearObjetosDecoradores();
         this.crearJPanels();
@@ -65,13 +65,6 @@ public class LoginTemplate extends JFrame {
 
     public void crearObjetosDecoradores(){
 
-        colorAzul = new Color(60, 78, 120);
-        colorGrisOscuro = new Color(80, 80, 80);
-        fontTPrincipal = new Font("Rockwell Extra Bold", Font.PLAIN, 20);
-        fontTitulo = new Font("Montserrat", Font.PLAIN, 18);
-        fontSubtitulo = new Font("Forte", Font.PLAIN, 13);
-        cMano = new Cursor(Cursor.HAND_CURSOR);
-        border = BorderFactory.createMatteBorder(0, 0, 2, 0, colorAzul);
         iFondo = new ImageIcon("Clase4/resources/img/fondo.png");
         iLogo = new ImageIcon("Clase4/resources/img/logo.png");
         iUsuario = new ImageIcon("Clase4/resources/img/usuario.png");
@@ -81,7 +74,6 @@ public class LoginTemplate extends JFrame {
         iTwitter = new ImageIcon("Clase4/resources/img/twitter.png");
         iYoutube = new ImageIcon("Clase4/resources/img/youtube.png");
         iSvg = new ImageIcon("Clase4/resources/img/imagen.png");
-        iCerrar = new ImageIcon("Clase4/resources/img/cerrar.png");
     }
 
     public void crearJPanels(){
@@ -101,7 +93,8 @@ public class LoginTemplate extends JFrame {
 
         tNombreUsuario = sObjGraficos.construirJTextField(
             "Nombre Usuario", (pDerecha.getWidth() - 260) / 2, 130, 260, 40, 
-            Color.WHITE, colorAzul, colorGrisOscuro, null, border, "c"
+            Color.WHITE, sRecursos.getColorAzul(), sRecursos.getColorGrisOscuro(), 
+            null, sRecursos.getBorderInferiorAzul(), "c"
         );
         pDerecha.add(tNombreUsuario);
     }
@@ -110,24 +103,24 @@ public class LoginTemplate extends JFrame {
 
         bEntrar = sObjGraficos.construirJButton(
             "Entrar", (pDerecha.getWidth() - 230) / 2, 330, 
-            250, 45, cMano, null, null, colorAzul, 
+            250, 45, sRecursos.getCMano(), null, null, sRecursos.getColorAzul(), 
             Color.WHITE, null, "c", true
         );
         pDerecha.add(bEntrar);
 
         iDimAux = new ImageIcon(
-            iCerrar.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
+            sRecursos.getICerrar().getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
         );
 
         bCerrar = sObjGraficos.construirJButton(
-            null, 350, 10, 45, 30, cMano, iDimAux, null, 
+            null, 350, 10, 45, 30, sRecursos.getCMano(), iDimAux, null, 
             null, null, null, "c", false
         );
         pDerecha.add(bCerrar);
 
         bRegistrarse = sObjGraficos.construirJButton(
-            "Registrarse", 240, 460, 145, 35, cMano, null, 
-            null, colorAzul, Color.WHITE, null, "c", true
+            "Registrarse", 240, 460, 145, 35, sRecursos.getCMano(), null, 
+            null, sRecursos.getColorAzul(), Color.WHITE, null, "c", true
         );
         pDerecha.add(bRegistrarse);
 
@@ -136,19 +129,19 @@ public class LoginTemplate extends JFrame {
         );
 
         bOpcion1 = sObjGraficos.construirJButton(
-            null, 10, 220, 30, 20, cMano, iDimAux, null,
+            null, 10, 220, 30, 20, sRecursos.getCMano(), iDimAux, null,
             null, null, null, "c", false
         );
         pIzquierda.add(bOpcion1);
 
         bOpcion2 = sObjGraficos.construirJButton(
-            null, 10, 250, 30, 20, cMano, iDimAux, null,
+            null, 10, 250, 30, 20, sRecursos.getCMano(), iDimAux, null,
             null, null, null, "c", false
         );
         pIzquierda.add(bOpcion2);
 
         bOpcion3 = sObjGraficos.construirJButton(
-            null, 10, 280, 30, 20, cMano, iDimAux, null,
+            null, 10, 280, 30, 20, sRecursos.getCMano(), iDimAux, null,
             null, null, null, "c", false
         );
         pIzquierda.add(bOpcion3);
@@ -164,7 +157,7 @@ public class LoginTemplate extends JFrame {
         pIzquierda.add(lLogo);
 
         lTituloApp = sObjGraficos.construirJLabel(
-            "Login de Usuario", 100, 20, 220, 30, null, Color.WHITE, null, fontTPrincipal
+            "Login de Usuario", 100, 20, 220, 30, null, Color.WHITE, null, sRecursos.getFontTPrincipal()
         );
         pIzquierda.add(lTituloApp);
 
@@ -177,19 +170,19 @@ public class LoginTemplate extends JFrame {
 
         lEslogan = sObjGraficos.construirJLabel(
             "Te ayudamos en todo", (pDerecha.getWidth() - 130) / 2, 60, 130, 20, 
-            null, colorGrisOscuro, null, fontSubtitulo
+            null, sRecursos.getColorGrisOscuro(), null, sRecursos.getFontSubtitulo()
         );
         pDerecha.add(lEslogan);
 
         lTituloLogin = sObjGraficos.construirJLabel(
             "Registra tus Datos", (pDerecha.getWidth() - 150) / 2, 80, 150, 30, 
-            null, colorGrisOscuro, null, fontTitulo
+            null, sRecursos.getColorGrisOscuro(), null, sRecursos.getFontTitulo()
         );
         pDerecha.add(lTituloLogin);
 
         lNotificaciones = sObjGraficos.construirJLabel(
             "¿Recibir Notificaciones?", (pDerecha.getWidth() - 140) / 2, 400, 140, 20, 
-            null, colorGrisOscuro, null, fontSubtitulo
+            null, sRecursos.getColorGrisOscuro(), null, sRecursos.getFontSubtitulo()
         );
         pDerecha.add(lNotificaciones);
 
@@ -240,7 +233,7 @@ public class LoginTemplate extends JFrame {
 
         tClaveUsuario = sObjGraficos.construirJPasswordField(
             "clave Usuario", (pDerecha.getWidth() - 260) / 2, 260, 260, 40, 
-            null, colorAzul, colorGrisOscuro, null, border, "c"
+            null, sRecursos.getColorAzul(), sRecursos.getColorGrisOscuro(), null, sRecursos.getBorderInferiorAzul(), "c"
         );
         pDerecha.add(tClaveUsuario);
     }
@@ -249,7 +242,7 @@ public class LoginTemplate extends JFrame {
 
         cbTipoUsuario = sObjGraficos.construirJComboBox(
             "Cliente_Cajero_Administrador", (pDerecha.getWidth() - 220) / 2, 210, 220, 30, 
-            Color.WHITE, colorAzul, "c"
+            Color.WHITE, sRecursos.getColorAzul(), "c"
         );
         pDerecha.add(cbTipoUsuario);
     }
@@ -257,12 +250,12 @@ public class LoginTemplate extends JFrame {
     public void crearJCheckBoxes(){
 
         checkSi = sObjGraficos.construirJCheckBox(
-            "Si", (pDerecha.getWidth() - 45) / 2 - 15, 375, 45, 25, cMano, null, null
+            "Si", (pDerecha.getWidth() - 45) / 2 - 15, 375, 45, 25, sRecursos.getCMano(), null, null
         );
         pDerecha.add(checkSi);
 
         checkNo = sObjGraficos.construirJCheckBox(
-            "No", (pDerecha.getWidth() + 45) / 2 - 15, 375, 45, 25, cMano, null, null
+            "No", (pDerecha.getWidth() + 45) / 2 - 15, 375, 45, 25, sRecursos.getCMano(), null, null
         );
         pDerecha.add(checkNo);
 

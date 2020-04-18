@@ -447,5 +447,131 @@ Podemos observar lo siguiente en la creación de los dos anteriores botones:
     * Como este botón no tiene color de fondo entonces es un botón transparente y se envía un False para conseguir esto.
 
 
-    El resto de métodos de nuestro servicio esta contenido dentro de nuestro repositorio, puede observar todo el código  entrando a la carpeta **Clase4** luego a la carpeta **src/app** seguido de la carpeta **services** y entrando a la clase **objGraficosservice.java**. Allí usted podrá copiar los métodos que hacen falta y empezar a implementarla desde la clase **LoginTemplate** para la optimización del código. 
+    El resto de métodos de nuestro servicio esta contenido dentro de este repositorio, puede observar todo el código  entrando a la carpeta **Clase4** luego a la carpeta **src/app** seguido de la carpeta **services** y entrando a la clase **objGraficosservice.java**. Allí usted podrá copiar los métodos que hacen falta y empezar a implementarlos desde la clase **LoginTemplate** para la optimización del código. 
      
+<div align="center">
+  <img  src="./resources/repositorio1.png">
+  <p>Carpeta Clase4 dentro del repositorio.</p>
+</div>
+
+<div align="center">
+  <img  src="./resources/repositorio2.png">
+  <p>Carpeta src/app dentro del repositorio.</p>
+</div>
+
+<div align="center">
+  <img  src="./resources/repositorio3.png">
+  <p>Carpeta services dentro del repositorio.</p>
+</div>
+
+<div align="center">
+  <img  src="./resources/repositorio4.png">
+  <p>Clase ObjGraficosService.java dentro del repositorio.</p>
+</div>
+
+<div align="center">
+  <img  src="./resources/repositorio5.png">
+  <p>Código del servicio dentro del repositorio.</p>
+</div>
+
+# Optimización de recursos
+
+Si ya hemos llegado hasta aquí hemos realizado una moduralización de nuestro código y ademas  una optimización de este. Pero aun podemos dar un paso más y es en cuanto a la optimización de recursos. Esto se refiere a la creación desproporcionada de objetos que estaremos creando en nuestras clases. 
+
+Tenemos que hallar una forma de controlar la creación de objetos que muy posiblemente usemos en varias clases. Por ejemplo los objetos decoradores son muy propensos a ser utilizados en diferentes clases. Es muy posible que el cursor que creamos para pasar sobre los botones lo usemos también en otras clases que tengan botones. El color Azul muy posiblemente lo usemos en nuestra clase **VistaPrincipalTemplate** y en muchas otras más. 
+
+Imaginen que por cada clase **template** que tengamos en un proyecto vamos a crear un objeto para el cursor o varios objetos para usar las mismas fuentes, colores, bordes o imágenes. La cantidad de recursos en memoria sería exorbitante.
+
+Vamos a crear otro servicio llamado **RecursosService** y realizaremos el mismo mecanismo de única ejemplificación explicada previamente.
+
+<div align="center">
+  <img  src="./resources/codigo11.png">
+  <p>Creación de servicio Recursos.</p>
+</div>
+
+Ahora en login Template debemos igualmente obtener el objeto de este servicio:
+
+```javascript
+import app.services.RecursosService;
+```
+```javascript
+private RecursosService sRecursos;
+```
+```javascript
+sRecursos = RecursosService.getService();
+```
+Vamos a mirar que objetos decoradores posiblemente se usen en otras clases:
+
+* El cursor de mano para los botones seguramente se use en varias clases.
+* Los colores también se usaran en varias partes del proyecto.
+* Las fuentes se usaran claramente en otras clases.
+* El borde azul en la parte inferior es probable que lo usemos en otras partes.
+* La imagen de cerrar ventana se podría volver a utilizar en la Vista principal.
+
+Ahora vamos a realizar la creación de estos objetos en este servicio (los podemos crear dentro del constructor del servicio o en un método encargado de la creación de objetos gráficos dentro del servicio) y los borraremos de nuestra clases **LoginTemplate**:
+
+<div align="center">
+  <img  src="./resources/codigo12.png">
+  <p>El método crearObjetosDecoradores con solo los objetos decoradores que solo se usaran en esa clase.</p>
+</div>
+
+<div align="center">
+  <img  src="./resources/codigo13.png">
+  <p>Objetos decoradores que se van a utilizar en varias partes del proyecto creados dentro del servicio.</p>
+</div>
+
+
+Ahora para que cualquier clase **template** pueda obtener estos objetos decoradores a traves del servicio necesitamos crear unos métodos **get** que nos retornen estos objetos:
+
+```javascript
+public Color getColorAzul(){
+    return colorAzul;
+}
+
+public Color getColorGrisOscuro(){
+    return colorGrisOscuro;
+}
+
+public Font getFontTPrincipal(){
+    return fontTPrincipal;
+}
+
+public Font getFontTitulo(){
+    return fontTitulo;
+}
+
+public Font getFontSubtitulo(){
+    return fontSubtitulo;
+}
+
+public Cursor getCMano(){
+    return cMano;
+}
+
+public Border getBorderInferiorAzul(){
+    return borderInferiorAzul;
+}
+
+public ImageIcon getICerrar(){
+    return iCerrar;
+}
+```
+
+Nuestro servicio esta listo para ser usado. Ahora desde nuestra clase **LoginTemplate** cuando necesitemos uno de estos objetos decoradores solo llamaremos al servicio seguido del método **get** que necesitemos. Mostraremos un ejemplo de esto:
+
+<div align="center">
+  <img  src="./resources/codigo14.png">
+  <p>Ejemplo de implementación de servicio de Recursos para obtener objetos decoradores compartidos entre clases.</p>
+</div>
+
+Se debe hacer esto con todos los objetos que eliminamos de la clase.
+
+# Resultado
+
+Si has llegado hasta aquí **!Felicidades!** ahora no solo tienes una interfaz gráfica agradable para el usuario, también tienes un código mucho más optimizado modularizado, responsable con los recursos y mantenible.
+
+En la siguiente clase vamos a revisar el concepto de Componente gráfico y su importancia en la creación de interfaces gráfica con proyectos grandes, eventos básicos de botones.
+
+# Actividad
+
+Implementa los servicios de creación de objetos gráficos y de recursos para agregar optimización de código y recursos.  Ademas de realizar modularizacion en el código.
