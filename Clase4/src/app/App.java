@@ -1,9 +1,10 @@
 package app;
 
 import app.client.login.LoginTemplate;
+import app.client.vistaPrincipal.VistaPrincipalTemplate;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        LoginTemplate vista = new LoginTemplate();
+        VistaPrincipalTemplate vista = new VistaPrincipalTemplate();
     }
 }

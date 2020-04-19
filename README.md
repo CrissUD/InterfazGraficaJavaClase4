@@ -23,7 +23,7 @@ En nuestras anteriores clases hemos creado una clase **VistaPrincipalTemplate** 
   <p>Clases UI en sus respectivos paquetes</p>
 </div>
 
-Ahora y por motivos de modularidad vamos a crear un paquete llamado **client** y allí vamos a dejar nuestros paquetes de las clases UI que hemos creado. Nuestro archivo de ejecución App.java sigue estando ubicado en el paquete principal **app**.
+Ahora por motivos de modularidad vamos a crear un paquete llamado **client** y allí vamos a dejar nuestros paquetes de las clases UI que hemos creado. Nuestro archivo de ejecución App.java sigue estando ubicado en el paquete principal **app**.
 
 <div align="center">
   <img  src="./resources/paquetes2.png">
@@ -46,7 +46,7 @@ También creamos nuestra clase **LoginTemplate** y el resultado de nuestra anter
 
 # Modularización de código
 
-Ya hemos creado nuestro login de usuario que se ve muy bien, sin embargo si en algún momento queremos cambiar una configuración en alguno de los objetos gráficos creados va ser algo complicado de encontrar. Aunque nuestro código tiene algo de organización con la separación de la creación de cada uno de nuestros objetos gráficos, nuestro constructor tiene una gran cantidad de lineas de código.
+Ya hemos creado nuestro login de usuario que se ve muy bien, sin embargo si en algún momento queremos cambiar una configuración en alguno de los objetos gráficos creados va ser algo complicado encontrar dicho objeto. Aunque nuestro código tiene algo de organización con la separación de la creación de cada uno de nuestros objetos gráficos, nuestro constructor tiene una gran cantidad de lineas de código.
 
 <div align="center">
   <img  src="./resources/codigo1.png">
@@ -54,7 +54,7 @@ Ya hemos creado nuestro login de usuario que se ve muy bien, sin embargo si en a
 </div>
 
 
-Una buena idea para organizar nuestro código seria la creación de métodos que nos ayuden con la separación de la creación de objetos gráficos de acuerdo a sus tipos. Por ejemplo podemos crear un método llamado **crearJPanels()** e insertar la creación de todos nuestros objetos tipo JPanel  allí.
+Una buena idea para organizar nuestro código seria el uso de métodos que nos ayuden separar la creación de objetos gráficos de acuerdo a sus tipos. Por ejemplo podemos crear un método llamado **crearJPanels()** e insertar la creación de todos nuestros objetos tipo JPanel  allí.
 
 ```javascript
 public void crearJPanels(){
@@ -237,11 +237,11 @@ Dentro de nuestro proyecto en el paquete raíz **app** ahora crearemos un nuevo 
 
 Cabe resaltar que los servicios que creemos en nuestro proyecto tendrán el nombre de la clase (arbitrario) seguido de la palabra **Service**.
 
-Nuestra clase **ObjGraficosService** se encargará de la creación de los objetos gráficos a traves de métodos que podremos usar desde cualquier clase **Template** que tengamos en nuestro proyecto. Para garantizar lo anterior dicho debemos crear un mecanismo para que cualquier clase desde cualquier parte pueda llamar al objeto y pueda usar sus métodos pero a su vez **este objeto solo se cree una vez para todas las clases.**
+Nuestra clase **ObjGraficosService** se encargará de la construcción de los objetos gráficos a traves de métodos que podremos usar desde cualquier clase **Template** que tengamos en nuestro proyecto. Para garantizar lo anterior dicho, debemos crear un mecanismo para que cualquier clase dentro de la aplicación pueda llamar al objeto y pueda usar sus métodos pero a su vez **este objeto solo se cree una vez para todas las clases.**
 
 ## Singleton 
 
-Es importante que este servicio se cree una vez en memoria y solo una vez por que va a ser un objeto usado en todas las clases **template** que creemos y si nuestro proyecto tiene 30 clases y si cada clase crea un objeto de este servicio estamos creando 29 objetos de más innecesarios que consumirán recursos. 
+Es importante que este servicio se cree una sola vez en memoria. Esto por que va a ser un objeto usado en todas las clases **template** que creemos y si nuestro proyecto tiene 30 clases por ejemplo y si cada una de estas crea un objeto de este servicio estamos creando 29 objetos de más innecesarios que consumirán recursos. 
 
 Lo primero que haremos es crear su constructor pero su **tipo de acceso será privado**:
 
@@ -271,10 +271,10 @@ Se pueden notar varias cosas del método anterior:
 * La palabra clave **static** asegura que el método dentro de este servicio pueda ser llamado desde cualquier otra clase sin necesidad de ejemplificar el objeto anteriormente. 
 * En el atributo de la clase se pone el **static** también por que las variables que se trabajen dentro de un método **static** deben serlo también.
 * El método retorna un objeto de la propia clase.
-* El **if** asegura la ejemplificación única del objeto del servicio, si este es nulo lo ejemplifica, cosa que ocurrirá la primera vez que se llame al método. Pero la segunda vez que se llame, como este objeto ya fue ejemplificado previamente ya no entrara al if y lo retornara simplemente.
+* El **if** asegura la ejemplificación única del objeto del servicio, si este es nulo lo ejemplifica, cosa que ocurrirá la primera vez que se llame al método. Pero en las posteriores llamadas al método, como el objeto ya fue ejemplificado previamente ya no entrara al if y lo retornara simplemente.
 * Este método que acabamos de realizar es conocido como **Patron Singleton**.
 
-Ahora en nuestra Clase **LoginTemplate** podemos obtener su objeto llamando a este método de la siguiente manera:
+Ahora en nuestra Clase **LoginTemplate** podemos obtener el objeto del servicio llamando a este método de la siguiente manera:
 * Primero se importa el servicio
 ```javascript
 import app.services.ObjGraficosService;
@@ -296,7 +296,7 @@ Ahora veremos un acercamiento de como serán los métodos de que encapsulan la c
 
 ## JPanel 
 
-Dentro de nuestro servicio podemos empezar con la construcción de paneles para esto declaramos un objeto gráfico tipo JPanel y lo configuramos dentro de un método al cual llamaremos **construirJPanel**, este recibirá por parámetros las cosas necesarias para su correcta creación.
+Dentro de nuestro servicio podemos empezar con la construcción de paneles para esto declaramos un objeto gráfico tipo JPanel y lo configuramos dentro de un método al cual llamaremos **construirJPanel**, este recibirá por parámetros las cosas necesarias para su correcta construcción.
 
 ```javascript
 private JPanel panel;
@@ -321,6 +321,8 @@ Podemos observar que este método retorna un objeto tipo JPanel y recibe por par
 * **Borde**: recibe un objeto decorador tipo Border.
 
 Adentro se encarga de la **ejemplificación y configuración del objeto gráfico para después retornarlo** por lo que realiza 2 de las 4 etapas de la creación de un objeto gráfico, estas dos etapas las podemos generalizar en un termino que es la construcción del objeto, esta es la razón de su nombre.
+
+También se puede notar que hay configuraciones por defecto como la anulación del Layout Manager para ser posicionado por nosotros mismos.
 
 Ahora desde nuestra clase **LoginTemplate** podemos llamar a este método buscando un panel dentro del método encargado de la creación de paneles y poner:
 
@@ -408,9 +410,9 @@ Podemos observar que el método recibe por parámetros lo siguiente:
     * "l" (left): si se desea dejar el contenido en la parte izquierda.
     * "c" (center): si se desea dejar el contenido en el centro.
     * "r" (right): si se desea dejar el contenido en la parte derecha.
-* **¿es Solido?:** recibe un booleano, si se manda en True dejara las propiedades de contenido de Java, si se pasa como False le quitara esas propiedades dejándolo transparente.
+* **¿es Solido?:** recibe un booleano, y pregunta si se quiere crear un botón solido o transparente. Si se manda en True dejara las propiedades de contenido de Java, si se pasa como False le quitara esas propiedades dejándolo transparente.
 
-Ahora desde nuestra clase **LoginTemplate** podemos llamar a este método para la construcción de los botones, a continuación se muestran 2 botones diferentes para ver las particularidades:
+Ahora desde nuestra clase **LoginTemplate** podemos llamar a este método para la construcción de los botones, a continuación se muestran 2 botones diferentes para ver algunas particularidades:
 ```javascript
 bEntrar = sObjGraficos.construirJButton(
     "Entrar", (pDerecha.getWidth() - 230) / 2, 330, 
@@ -432,18 +434,18 @@ pDerecha.add(bCerrar);
 
 Podemos observar lo siguiente en la creación de los dos anteriores botones:
 * **Primer botón:**
-    * Este botón contiene texto asi que se enviá.
-    * Va posicionado en la mitad del panel por lo que se envía el calculo pero ahora enviando el ancho del botón como numero directamente. 
+    * Este botón contiene texto asi que se enviá en forma de comillas " ".
+    * Va posicionado en la mitad del panel por lo que se envía el calculo, solo que ahora enviando el ancho del botón como numero directamente. 
     * Tiene incorporado un cursor y se envía como argumento.
     * Tiene color de fondo y color de fuente por lo que se envía como argumento.
-    * Su contenido esta centrado por lo que se envía una "c".
+    * Su contenido esta centrado por lo que se envía una "c" como argumento.
     * Como este botón tiene color de fondo entonces es un botón solido y se envía True.
 * **Segundo botón:**
     * Este botón no tiene texto asi que se enviá null como argumento.
     * Este botón contiene una imagen, pero esta debe ser previamente redimensionada para que al enviarse quede como queremos. 
     * Tiene incorporado un cursor y se envía como argumento.
     * No contiene ningún color asi que se envía como argumentos null.
-    * Su contenido esta centrado por lo que se envía una "c".
+    * Su contenido esta centrado por lo que se envía una "c" como argumento.
     * Como este botón no tiene color de fondo entonces es un botón transparente y se envía un False para conseguir esto.
 
 
@@ -474,9 +476,12 @@ Podemos observar lo siguiente en la creación de los dos anteriores botones:
   <p>Código del servicio dentro del repositorio.</p>
 </div>
 
+Este servicio podrá usarse en todos sus proyectos front-end para hacer más fácil la creación de objetos gráficos, cuando tenga el servicio completo podrá usarlo en la clase **loginTemplate** para la construcción de todos los objetos gráficos.
+
+
 # Optimización de recursos
 
-Si ya hemos llegado hasta aquí hemos realizado una moduralización de nuestro código y ademas  una optimización de este. Pero aun podemos dar un paso más y es en cuanto a la optimización de recursos. Esto se refiere a la creación desproporcionada de objetos que estaremos creando en nuestras clases. 
+Si ya hemos llegado hasta aquí hemos realizado una moduralización de nuestro código y ademas  una optimización de este. Pero aun podemos dar un paso más, vamos a ver la optimización de recursos. Esto intenta resolver la creación desproporcionada de objetos que estaremos creando en nuestras clases. 
 
 Tenemos que hallar una forma de controlar la creación de objetos que muy posiblemente usemos en varias clases. Por ejemplo los objetos decoradores son muy propensos a ser utilizados en diferentes clases. Es muy posible que el cursor que creamos para pasar sobre los botones lo usemos también en otras clases que tengan botones. El color Azul muy posiblemente lo usemos en nuestra clase **VistaPrincipalTemplate** y en muchas otras más. 
 
@@ -500,7 +505,7 @@ private RecursosService sRecursos;
 ```javascript
 sRecursos = RecursosService.getService();
 ```
-Vamos a mirar que objetos decoradores posiblemente se usen en otras clases:
+Vamos a mirar que objetos decoradores se pueden usar en varias clases **template**:
 
 * El cursor de mano para los botones seguramente se use en varias clases.
 * Los colores también se usaran en varias partes del proyecto.
@@ -508,18 +513,17 @@ Vamos a mirar que objetos decoradores posiblemente se usen en otras clases:
 * El borde azul en la parte inferior es probable que lo usemos en otras partes.
 * La imagen de cerrar ventana se podría volver a utilizar en la Vista principal.
 
-Ahora vamos a realizar la creación de estos objetos en este servicio (los podemos crear dentro del constructor del servicio o en un método encargado de la creación de objetos gráficos dentro del servicio) y los borraremos de nuestra clases **LoginTemplate**:
-
-<div align="center">
-  <img  src="./resources/codigo12.png">
-  <p>El método crearObjetosDecoradores con solo los objetos decoradores que solo se usaran en esa clase.</p>
-</div>
+Ahora vamos a realizar la creación de estos objetos decoradores en el servicio (los podemos crear dentro del constructor del servicio o en un método encargado de la creación de objetos decoradores dentro del servicio) y los borraremos de nuestra clases **LoginTemplate**:
 
 <div align="center">
   <img  src="./resources/codigo13.png">
   <p>Objetos decoradores que se van a utilizar en varias partes del proyecto creados dentro del servicio.</p>
 </div>
 
+<div align="center">
+  <img  src="./resources/codigo12.png">
+  <p>El método crearObjetosDecoradores con solo los objetos decoradores necesarios unicamente en esa clase.</p>
+</div>
 
 Ahora para que cualquier clase **template** pueda obtener estos objetos decoradores a traves del servicio necesitamos crear unos métodos **get** que nos retornen estos objetos:
 
@@ -564,7 +568,22 @@ Nuestro servicio esta listo para ser usado. Ahora desde nuestra clase **LoginTem
   <p>Ejemplo de implementación de servicio de Recursos para obtener objetos decoradores compartidos entre clases.</p>
 </div>
 
-Se debe hacer esto con todos los objetos que eliminamos de la clase.
+Se debe hacer esto con todos los objetos que eliminamos de la clase **LoginTemplate**.
+
+Ahora si por ejemplo en nuestra clase **VistaPrincipalTemplate** necesitamos utilizar alguno de estos objetos decoradores como el color Azul para dejar el fondo de la ventana con ese color ahora llamaremos al servicio para obtenerlo:
+
+<div align="center">
+  <img  src="./resources/codigo15.png">
+  <p>Servicio Recursos utilizado en la clase VistaPrincipalTemplate para obtener el color azul.</p>
+</div>
+
+
+<div align="center">
+  <img  src="./resources/interfaz6.png">
+  <p>Ventana VistaPrincipalTemplate.</p>
+</div>
+
+ Aunque el objeto se ve reflejado en dos clases distintas solo existe una vez en memoria. De igual forma el servicio **RecursosService** solo existirá una vez en memoria sin importar en cuantas clases lo llamen.
 
 # Resultado
 
