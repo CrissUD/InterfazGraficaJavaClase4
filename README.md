@@ -135,6 +135,15 @@ public void crearJCheckBoxes(){
 
 Hay que aclarar varias cosas aquí:
 
+## Excepción
+
+Existe una excepción para la variable **iDimAux** encargada de redimensionar las imágenes, esta estará presente en los diferentes métodos de construcción ya que es una variable auxiliar y es necesario dejarla justo encima del objeto gráfico que la vaya a usar ya que esta variable estará cambiando constantemente con cada redimension nueva requerida.
+
+<div align="center">
+  <img  src="./resources/codigo17.png">
+  <p>Excepción con variable auxiliar que estará presente en varios métodos de creación.</p>
+</div>
+
 ## ¿Por que es posible hacer esta modularización?
 
 Como recordaremos, la declaración de nuestros objetos gráficos y objetos decoradores la realizamos de forma global al inicio de nuestra clase, haciendo de estos objetos atributos de nuestra clase. 
@@ -225,13 +234,6 @@ Ademas para poder concentrarnos aun mejor en una parte de nuestro código, el ed
 <div align="center">
   <img  src="./resources/codigo6.png">
   <p>Minimización de código por métodos.</p>
-</div>
-
-**Nota:** Existe una excepción para la variable **iDimAux** encargada de redimensionar las imágenes, esta estará presente en los diferentes métodos de construcción ya que es una variable auxiliar y es necesario dejarla justo encima del objeto gráfico que la vaya a usar ya que esta variable estará cambiando constantemente con cada redimension nueva requerida.
-
-<div align="center">
-  <img  src="./resources/codigo17.png">
-  <p>Excepción con variable auxiliar que estará presente en varios métodos de creación.</p>
 </div>
 
 # Optimización de código
