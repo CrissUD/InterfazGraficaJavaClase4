@@ -242,7 +242,7 @@ Ya aprendimos la forma de como crear nuestros objetos gráficos para mostrarlos 
 
 Una alternativa a esto es la creación de una clase que se encargue de proporcionarnos un servicio, este servicio sera el de la construcción de los objetos gráficos de forma genérica de tal forma que para crear uno de estos objetos solo tengamos que llamar al servicio y este nos lo retorne. Vamos a explicar de que se trata.
 
-**Nota**: *Antes de continuar vamos a ver que se tratara con un tema relacionado a los servicios, esta clase no tiene como finalidad explicar que son los servicios asi que solo se dará una breve explicación de ellos a medida que se avanza, sin embargo en clases posteriores nos enfocaremos en su concepto y finalidad.*
+**Nota**: *Antes de continuar vamos a ver que se tratara con un tema relacionado a los servicios, esta clase no tiene como finalidad explicar que son los servicios asi que solo se dará una breve explicación de ellos a medida que se avanza, sin embargo en clases posteriores nos enfocaremos en su concepto y finalidad. Estos servicios tampoco esta relacionado al concepto de servicios web.* 
 
 Dentro de nuestro proyecto en el paquete raíz **app** ahora crearemos un nuevo paquete al cual llamaremos **services** y dentro crearemos una clase llamada **ObjGraficosService**.
 
