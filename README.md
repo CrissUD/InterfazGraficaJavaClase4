@@ -466,7 +466,7 @@ Debemos hacer uso del servicio para crear los otros botones en nuestra clase **L
 
 <div align="center">
   <img  src="./resources/interfaz7.png">
-  <p>Interfaz gráfica funcionando correctamente con la incorporación del servicio.</p>
+  <p>Interfaz gráfica funcionando correctamente con la incorporación del servicio ObjGraficosService.</p>
 </div>
 
 El resto de métodos de nuestro servicio esta contenido dentro de este repositorio, puede observar todo el código  entrando a la carpeta **Clase4** luego a la carpeta **src/app** seguido de la carpeta **services** y entrando a la clase **objGraficosservice.java**. Allí usted podrá copiar los métodos que hacen falta y empezar a implementarlos desde la clase **LoginTemplate** para la optimización del código. 
@@ -592,7 +592,13 @@ Nuestro servicio esta listo para ser usado. Ahora desde nuestra clase **LoginTem
   <p>Ejemplo de implementación de servicio de Recursos para obtener objetos decoradores compartidos entre clases.</p>
 </div>
 
-Se debe hacer esto con todos los objetos que eliminamos de la clase **LoginTemplate**.
+Se debe hacer esto con todos los objetos que eliminamos de la clase **LoginTemplate** y correr la aplicación para verificar que esta ocurriendo todo con normalidad.
+
+<div align="center">
+  <img  src="./resources/interfaz7.png">
+  <p>Interfaz gráfica funcionando correctamente con la incorporación del servicio RecursosService.</p>
+</div>
+
 
 Ahora si por ejemplo en nuestra clase **VistaPrincipalTemplate** necesitamos utilizar alguno de estos objetos decoradores como el color Azul para dejar el fondo de la ventana con ese color ahora llamaremos al servicio para obtenerlo:
 
