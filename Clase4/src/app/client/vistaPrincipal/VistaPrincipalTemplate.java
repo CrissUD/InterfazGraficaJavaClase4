@@ -6,6 +6,8 @@ import app.services.RecursosService;
 
 public class VistaPrincipalTemplate extends JFrame {
 
+    private static final long serialVersionUID = 8914150529633029064L;
+
     private RecursosService sRecursos;
 
     public VistaPrincipalTemplate() {

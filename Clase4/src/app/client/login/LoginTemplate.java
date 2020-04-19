@@ -17,6 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class LoginTemplate extends JFrame {
+
+    private static final long serialVersionUID = 7215779126893195799L;
+    
     // Declaración Objetos Gráficos
     private JPanel pDerecha, pIzquierda;
     private JLabel lTituloApp, lEslogan, lTituloLogin, lNotificaciones;
