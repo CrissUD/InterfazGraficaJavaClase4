@@ -28,7 +28,7 @@ public class ObjGraficosService {
     private JTextField textField;
     private JPasswordField passwordField;
     private JTextArea textArea;
-    private JComboBox comboBox;
+    private JComboBox<String> comboBox;
 
     static private ObjGraficosService servicio;
 
@@ -198,10 +198,10 @@ public class ObjGraficosService {
         return textArea;
     }
 
-    public JComboBox construirJComboBox(
+    public JComboBox<String> construirJComboBox(
         String cadena, int x, int y, int ancho, int alto,Color colorFondo, Color colorFuente, String direccion
     ){
-        comboBox=new JComboBox();
+        comboBox=new JComboBox<String>();
         comboBox.setSize(ancho, alto);
         comboBox.setLocation(x, y);
         String [] arregloCadena = cadena.split("_");

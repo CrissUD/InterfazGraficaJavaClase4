@@ -4,12 +4,8 @@ import app.services.ObjGraficosService;
 import app.services.RecursosService;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.border.Border;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -27,7 +23,7 @@ public class LoginTemplate extends JFrame {
     private JLabel lFondo, lSvg, lLogo, lUsuario, lClave, lFacebook, lTwitter, lYoutube;
     private JTextField tNombreUsuario;
     private JPasswordField tClaveUsuario;
-    private JComboBox cbTipoUsuario;
+    private JComboBox<String> cbTipoUsuario;
     private JButton bEntrar, bCerrar, bRegistrarse, bOpcion1, bOpcion2, bOpcion3;
     private JCheckBox checkSi, checkNo;
     private ButtonGroup grupo;
