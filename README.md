@@ -160,7 +160,7 @@ Esto permite que cualquier entorno interno (Método) dentro de nuestra clase pue
   <p>Error al crear los paneles dentro de un solo entorno.</p>
 </div>
 
-Es por esta razón que la declaración se hace de forma global y como atributos de nuestra clase. Aunque no todos nuestros objetos gráficos o decoradores tienen que ser atributos, por ejemplo un **ButtonGroup** que solo afecta a los objetos **JCheckBox** se puede crear como variable en el método **crearJCheckBoxes()** y como probablemente este objeto no se necesite para nada más en el futuro se podría tratar como una variable dentro de este método. El programador debe elegir cual de los objetos gráficos y objetos Decoradores necesita declarar globalmente o como variable dentro de un entorno.  Sin embargo nunca se sabe cuando se podría necesitar alguno de estos en otro contexto así que como preferencia personal es preferible mantener todos los objetos gráficos y los objetos Decoradores como atributos.
+Es por esta razón que la declaración se hace de forma global y como atributos de nuestra clase. Aunque no todos nuestros objetos gráficos o decoradores tienen que ser atributos, por ejemplo un **ButtonGroup** que solo afecta a los objetos **JCheckBox** se puede crear como variable en el método **crearJCheckBoxes()** y como probablemente este objeto no se necesite para nada más en el futuro se podría tratar como una variable dentro de este método. El programador debe elegir cual de los objetos gráficos y objetos Decoradores necesita declarar globalmente o como variable dentro de un entorno.  Sin embargo nunca se sabe cuando se podría necesitar alguno de estos en otro contexto (otras clases) así que como preferencia personal es preferible mantener todos los objetos gráficos y los objetos Decoradores como atributos.
 
 ## Ejecución de métodos de creación desde el constructor
 
@@ -248,7 +248,7 @@ Dentro de nuestro proyecto en el paquete raíz **app** ahora crearemos un nuevo 
 
 <div align="center">
   <img  src="./resources/paquetes3.png">
-  <p>Creación de paquete services y servicio para la creación de objetos gráficos.</p>
+  <p>Creación de paquete services y servicio para la construcción de objetos gráficos.</p>
 </div>
 
 Cabe resaltar que los servicios que creemos en nuestro proyecto tendrán el nombre de la clase (arbitrario) seguido de la palabra **Service**.
