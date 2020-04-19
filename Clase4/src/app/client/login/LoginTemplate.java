@@ -32,7 +32,6 @@ public class LoginTemplate extends JFrame {
     private ButtonGroup grupo;
 
     // Declaración objetos Decoradores
-    
     private ImageIcon iFondo, iSvg, iLogo, iUsuario, iClave, iPunto, iFacebook, iTwitter, iYoutube, iDimAux;
 
     // Declaración servicios

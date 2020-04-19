@@ -227,6 +227,12 @@ Ademas para poder concentrarnos aun mejor en una parte de nuestro código, el ed
   <p>Minimización de código por métodos.</p>
 </div>
 
+**Nota:** Existe una excepción para la variable **iDimAux** encargada de redimensionar las imágenes, esta estará presente en los diferentes métodos de construcción ya que es una variable auxiliar y es necesario dejarla justo encima del objeto gráfico que la vaya a usar ya que esta variable estará cambiando constantemente con cada redimension nueva requerida.
+
+<div align="center">
+  <img  src="./resources/codigo17.png">
+  <p>Excepción con variable auxiliar que estará presente en varios métodos de creación.</p>
+</div>
 
 # Optimización de código
 
@@ -498,6 +504,12 @@ El resto de métodos de nuestro servicio esta contenido dentro de este repositor
 
 Una vez haya copiado todos los métodos de construcción en el servicio, este estará listo para usarse en todas nuestras clases **template** que creemos posteriormente. Este servicio podrá usarse también en todos sus proyectos frontend para hacer más fácil la creación de objetos gráficos. Recuerde que cuando tenga el servicio completo podrá usarlo en la clase **loginTemplate** para la construcción de todos los objetos gráficos y probar que todo esta bien corriendo la aplicación.
 
+**Nota:** Una particularidad que vale la pena recalcar es cuando creamos un JComboBox a traves del servicio, este recibirá un argumento llamado cadena que representa las diferentes opciones que contendrá el ComboBox y deberán enviarse separando cada una de las opciones con un **"_"** como se observa a continuación:
+
+<div align="center">
+  <img  src="./resources/codigo16.png">
+  <p>Ejemplo creación JComboBox con el servicio.</p>
+</div>
 
 # Optimización de recursos
 
@@ -543,6 +555,12 @@ Ahora vamos a realizar la creación de estos objetos decoradores en el servicio 
 </div>
 
 Note que el nombre de la variable **border** cambio a **borderInferiorAzul** esto ya que es muy probable que creemos más bordes en nuestro proyecto y necesitamos ser específicos con cada uno de nuestros objetos.
+
+<div align="center">
+  <img  src="./resources/codigo18.png">
+  <p>Objetos decoradores que serán necesarios unicamente en la clase LoginTemplate.</p>
+</div>
+
 
 <div align="center">
   <img  src="./resources/codigo12.png">
@@ -592,7 +610,7 @@ Nuestro servicio esta listo para ser usado. Ahora desde nuestra clase **LoginTem
   <p>Ejemplo de implementación de servicio de Recursos para obtener objetos decoradores compartidos entre clases.</p>
 </div>
 
-Se debe hacer esto con todos los objetos que eliminamos de la clase **LoginTemplate** y correr la aplicación para verificar que esta ocurriendo todo con normalidad.
+Se debe hacer esto con todos los objetos decoradores que eliminamos de la clase **LoginTemplate** y correr la aplicación para verificar que esta ocurriendo todo con normalidad.
 
 <div align="center">
   <img  src="./resources/interfaz7.png">
