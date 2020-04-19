@@ -44,6 +44,14 @@ También creamos nuestra clase **LoginTemplate** y el resultado de nuestra anter
   <p>Login de usuario resultado anterior clase.</p>
 </div>
 
+# Modularización y optimización
+
+En esta clase vamos a ver 3 temas principales que nos ayudaran para que el código quer realicemos al construir interfaces gráficas de usuario sea mucho mas ordenado, mantenible y mas sencillo de hacer. Los temas principales son:
+
+* **Modularización de código**
+* **Optimización de código**
+* **Optimización de recursos**
+
 # Modularización de código
 
 Ya hemos creado nuestro login de usuario que se ve muy bien, sin embargo si en algún momento queremos cambiar una configuración en alguno de los objetos gráficos creados va ser algo complicado encontrar dicho objeto. Aunque nuestro código tiene algo de organización con la separación de la creación de cada uno de nuestros objetos gráficos, nuestro constructor tiene una gran cantidad de lineas de código.
@@ -129,7 +137,7 @@ Hay que aclarar varias cosas aquí:
 
 ## ¿Por que es posible hacer esta modularización?
 
-Como recordaremos, la declaración de nuestros objetos gráficos y objetos decoradores la realizamos de forma global al inicio de nuestra clase, haciendo de estos objetos gráficos atributos de nuestra clase. 
+Como recordaremos, la declaración de nuestros objetos gráficos y objetos decoradores la realizamos de forma global al inicio de nuestra clase, haciendo de estos objetos atributos de nuestra clase. 
 
 <div align="center">
   <img  src="./resources/atributos.png">
@@ -143,7 +151,7 @@ Esto permite que cualquier entorno interno (Método) dentro de nuestra clase pue
   <p>Error al crear los paneles dentro de un solo entorno.</p>
 </div>
 
-Es por esta razón que la declaración se hace de forma global y como atributos de nuestra clase. Aunque no todos nuestros objetos gráficos tienen que ser atributos, por ejemplo un **ButtonGroup** que solo afecta a los objetos **JCheckBox** se puede crear como variable en el método **crearJCheckBoxes()** y como probablemente este objeto no se necesite para nada más en el futuro se podría tratar como una variable dentro de este método. El programador debe elegir cual de los objetos gráficos y objetos Decoradores necesita declarar globalmente o como variable dentro de un entorno.  Sin embargo nunca se sabe cuando se podría necesitar alguno de estos en otro contexto así que como preferencia personal es preferible mantener todos los objetos gráficos y los objetos Decoradores como atributos.
+Es por esta razón que la declaración se hace de forma global y como atributos de nuestra clase. Aunque no todos nuestros objetos gráficos o decoradores tienen que ser atributos, por ejemplo un **ButtonGroup** que solo afecta a los objetos **JCheckBox** se puede crear como variable en el método **crearJCheckBoxes()** y como probablemente este objeto no se necesite para nada más en el futuro se podría tratar como una variable dentro de este método. El programador debe elegir cual de los objetos gráficos y objetos Decoradores necesita declarar globalmente o como variable dentro de un entorno.  Sin embargo nunca se sabe cuando se podría necesitar alguno de estos en otro contexto así que como preferencia personal es preferible mantener todos los objetos gráficos y los objetos Decoradores como atributos.
 
 ## Ejecución de métodos de creación desde el constructor
 
@@ -154,14 +162,14 @@ Si ya hemos pasado todos nuestros objetos gráficos y objetos Decoradores a sus 
   <p>Constructor después de hacer los métodos de creación.</p>
 </div>
 
-Se puede notar que lo único que esta dentro de nuestro constructor es la configuración de nuestra ventana. Si corremos nuestra aplicación notamos que no se vera nada. 
+Se puede notar que lo único que esta dentro de nuestro constructor es la configuración de nuestra ventana. Si corremos nuestra aplicación notamos que no se verá nada. 
 
 <div align="center">
   <img  src="./resources/interfaz3.png">
   <p>Login de usuario después de hacer los métodos de creación.</p>
 </div>
 
-Esto es por que tenemos que llamar desde el constructor nuestros métodos de creación. Por ejemplo al llamar estos métodos de creación : 
+Esto es por que tenemos que llamar desde el constructor nuestros métodos de creación. Por ejemplo al llamar estos 4 métodos de creación : 
 
 <div align="center">
   <img  src="./resources/codigo4.png">
