@@ -99,14 +99,31 @@ public void crearJTextFields(){
     pDerecha.add(tNombreUsuario);
 }
 ```
-
-otros métodos de creación necesarios para nuestra clase son:
-
+Ahora por ejemplo podemos crear un método **crearObjetosDecoradores** e insertar la creación de estos aquí:
 ```javascript
 public void crearObjetosDecoradores(){
-    ...
+    colorAzul = new Color(60, 78, 120);
+    colorGrisOscuro = new Color(80, 80, 80);
+    fontTPrincipal = new Font("Rockwell Extra Bold", Font.PLAIN, 20);
+    fontTitulo = new Font("Montserrat", Font.PLAIN, 18);
+    fontSubtitulo = new Font("Forte", Font.PLAIN, 13);
+    cMano = new Cursor(Cursor.HAND_CURSOR);
+    border = BorderFactory.createMatteBorder(0, 0, 2, 0, colorAzul);
+    iFondo = new ImageIcon("Clase3/resources/img/fondo.png");
+    iLogo = new ImageIcon("Clase3/resources/img/logo.png");
+    iUsuario = new ImageIcon("Clase3/resources/img/usuario.png");
+    iClave = new ImageIcon("Clase3/resources/img/clave.png");
+    iPunto = new ImageIcon("Clase3/resources/img/punto.png");
+    iFacebook = new ImageIcon("Clase3/resources/img/facebook.png");
+    iTwitter = new ImageIcon("Clase3/resources/img/twitter.png");
+    iYoutube = new ImageIcon("Clase3/resources/img/youtube.png");
+    iSvg = new ImageIcon("Clase3/resources/img/imagen.png");
+    iCerrar = new ImageIcon("Clase3/resources/img/cerrar.png");
 }
 ```
+Note que en el anterior metodo solo insertamos exclusivamente la **creación de objetos decoradores** (Colores, Fuentes, Imágenes, Cursores, Bordes), los objetos gráficos como los **JLabel** que contienen imágenes deben ir en su método correspondiente de **crearJLabels** y lo mismo con los botones.
+
+otros métodos de creación necesarios para nuestra clase son:
 ```javascript
 public void crearJButtons(){
     ...
@@ -160,7 +177,9 @@ Esto permite que cualquier entorno interno (Método) dentro de nuestra clase pue
   <p>Error al crear los paneles dentro de un solo entorno.</p>
 </div>
 
-Es por esta razón que la declaración se hace de forma global y como atributos de nuestra clase. Aunque no todos nuestros objetos gráficos o decoradores tienen que ser atributos, por ejemplo un **ButtonGroup** que solo afecta a los objetos **JCheckBox** se puede crear como variable en el método **crearJCheckBoxes()** y como probablemente este objeto no se necesite para nada más en el futuro se podría tratar como una variable dentro de este método. El programador debe elegir cual de los objetos gráficos y objetos Decoradores necesita declarar globalmente o como variable dentro de un entorno.  Sin embargo nunca se sabe cuando se podría necesitar alguno de estos en otro contexto (otras clases) así que como preferencia personal es preferible mantener todos los objetos gráficos y los objetos Decoradores como atributos.
+Es por esta razón que la declaración se hace de forma global y como atributos de nuestra clase **separando la declaración de la ejemplificación**. La declaración ira siempre al empezar las clases, la ejemplificación ira dentro de cada uno de los métodos.
+
+Aunque no todos nuestros objetos gráficos o decoradores tienen que ser atributos, por ejemplo un **ButtonGroup** que solo afecta a los objetos **JCheckBox** se puede crear como variable en el método **crearJCheckBoxes()** y como probablemente este objeto no se necesite para nada más en el futuro se podría tratar como una variable dentro de este método. El programador debe elegir cual de los objetos gráficos y objetos Decoradores necesita declarar globalmente o como variable dentro de un entorno.  Sin embargo nunca se sabe cuando se podría necesitar alguno de estos en otro contexto (otras clases) así que como preferencia personal es preferible mantener todos los objetos gráficos y los objetos Decoradores como atributos.
 
 ## Ejecución de métodos de creación desde el constructor
 
@@ -253,7 +272,21 @@ Dentro de nuestro proyecto en el paquete raíz **app** ahora crearemos un nuevo 
 
 Cabe resaltar que los servicios que creemos en nuestro proyecto tendrán el nombre de la clase (arbitrario) seguido de la palabra **Service**.
 
-Nuestra clase **ObjGraficosService** se encargará de la construcción de los objetos gráficos a traves de métodos que podremos usar desde cualquier clase **Template** que tengamos en nuestro proyecto. Para garantizar lo anterior dicho, debemos crear un mecanismo para que cualquier clase dentro de la aplicación pueda llamar al objeto y pueda usar sus métodos pero a su vez **este objeto solo se cree una vez para todas las clases.**
+Nuestra clase **ObjGraficosService** se encargará de la **construcción** de los objetos gráficos a traves de métodos que podremos usar desde cualquier clase **Template** que tengamos en nuestro proyecto. Para garantizar lo anterior dicho, debemos crear un mecanismo para que cualquier clase dentro de la aplicación pueda llamar al objeto y pueda usar sus métodos pero a su vez **este objeto solo se cree una vez para todas las clases.**
+## Antes de continuar
+ 
+Antes se hablo de las 4 etapas de la creación de un objeto gráfico:
+* **Declarar**
+* **Ejemplificar**
+* **Configurar**
+* **Adicionar**
+
+Note que hemos empezado a hablar de un termino que es la **construcción** de un objeto, este termino hace referencia a la generalización de 2 de las 4 etapas y son la de **ejemplificar** **configurar** quedando asi:
+
+* **Declarar**
+* **Construir** **(Ejemplificar, Configurar)**
+* **Adicionar**
+
 
 ## Singleton 
 
@@ -268,7 +301,7 @@ private ObjGraficosService(){
 ```
 Esto garantiza que no se pueda ejemplificar el objeto desde ninguna otra clase (es decir no se puede hacer  **.. = new ObjGraficosService()**).
 
-Dentro de la misma clase **ObjGraficosService** vamos a crear un objeto **static** de tipo de la misma clase:
+Dentro de la misma clase **ObjGraficosService** vamos a declarar un objeto **static** de tipo de la misma clase:
 ```javascript
 static private ObjGraficosService servicio;
 ```
@@ -529,6 +562,7 @@ Vamos a crear otro servicio llamado **RecursosService** y realizaremos el mismo 
 </div>
 
 Ahora en la clase **loginTemplate** debemos igualmente obtener el objeto de este servicio:
+
 **importación**
 ```javascript
 import app.services.RecursosService;
