@@ -261,7 +261,7 @@ Ya aprendimos la forma de como crear nuestros objetos gráficos para mostrarlos 
 
 Una alternativa a esto es la creación de una clase que se encargue de proporcionarnos un servicio, este servicio sera el de la construcción de los objetos gráficos de forma genérica de tal forma que para crear uno de estos objetos solo tengamos que llamar al servicio y este nos lo retorne. Vamos a explicar de que se trata.
 
-**Nota**: *Antes de continuar vamos a ver que se tratara con un tema relacionado a los servicios, esta clase no tiene como finalidad explicar que son los servicios asi que solo se dará una breve explicación de ellos a medida que se avanza, sin embargo en clases posteriores nos enfocaremos en su concepto y finalidad. Estos servicios tampoco están relacionados al concepto de servicios web.* 
+**Nota**: *Vamos a ver que se tratara con un tema relacionado a los servicios, esta clase no tiene como finalidad explicar que son los servicios asi que solo se dará una breve explicación de ellos a medida que se avanza, sin embargo en clases posteriores nos enfocaremos en su concepto y finalidad. Estos servicios tampoco están relacionados al concepto de servicios web.* 
 
 Dentro de nuestro proyecto en el paquete raíz **app** ahora crearemos un nuevo paquete al cual llamaremos **services** y dentro crearemos una clase llamada **ObjGraficosService**.
 
@@ -468,7 +468,7 @@ Podemos observar que el método recibe por parámetros lo siguiente:
 Ahora desde nuestra clase **LoginTemplate** podemos llamar a este método para la construcción de los botones, para lo que vamos a entrar al método encargado de la creación de los botones. A continuación se muestran 2 botones diferentes para ver algunas particularidades:
 ```javascript
 bEntrar = sObjGraficos.construirJButton(
-    "Entrar", (pDerecha.getWidth() - 230) / 2, 330, 
+    "Entrar", (pDerecha.getWidth() - 250) / 2, 330, 
     250, 45, cMano, null, null, colorAzul, 
     Color.WHITE, null, "c", true
 );
