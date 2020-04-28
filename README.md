@@ -669,6 +669,15 @@ Ahora si por ejemplo en nuestra clase **VistaPrincipalTemplate** necesitamos uti
 
  Aunque el objeto decorador **colorAzul** se ve reflejado en dos clases distintas solo existe una vez en memoria. De igual forma el servicio **RecursosService** solo existirá una vez en memoria sin importar en cuantas clases lo llamen.
 
+# Orden adicional
+
+Si alguno de nuestros métodos de creación hasta el momento queda demasiado largo es posible que sea difícil identificar donde esta cada objeto gráfico, una buena forma de dar un orden es mediante comentarios que servirán de títulos y guiás indicándonos donde esta cada objeto gráfico, esto no es obligatorio y personalmente es preferible usarlo en métodos de creación que quedan muy largos, en este caso se realizara para los métodos **crearJButtons** y **crearJLabels**:
+
+<div align='center'>
+    <img  src='./resources/codigo19.png'>
+    <p>Creación de comentarios que guian la creación de objetos gráficos</p>
+</div>
+
 # Resultado
 
 Si has llegado hasta aquí **!Felicidades!** ahora no solo tienes una interfaz gráfica agradable para el usuario, también tienes un código mucho más optimizado modularizado, responsable con los recursos y mantenible.
