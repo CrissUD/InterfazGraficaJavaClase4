@@ -680,7 +680,7 @@ Si alguno de nuestros métodos de creación hasta el momento queda demasiado lar
 
 # Resultado
 
-Si has llegado hasta aquí **!Felicidades!** ahora no solo tienes una interfaz gráfica agradable para el usuario, también tienes un código mucho más optimizado modularizado, responsable con los recursos y mantenible.
+Si has llegado hasta aquí **!Felicidades!** ahora no solo tienes una interfaz gráfica agradable para el usuario, también tienes un código mucho más organizado, modularizado, optimizado, responsable con los recursos y mantenible.
 
 En la siguiente clase vamos a revisar el concepto de Componente gráfico y su importancia en la creación de interfaces gráfica con proyectos grandes. También nos introduciremos a los eventos empezando con los eventos básicos de botones.
 
