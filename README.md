@@ -557,6 +557,11 @@ Imaginen que por cada clase **template** que tengamos en un proyecto vamos a cre
 Vamos a crear otro servicio llamado **RecursosService** y realizaremos el mismo mecanismo de única ejemplificación explicada previamente.
 
 <div align="center">
+  <img  src="./resources/paquetes4.png">
+  <p>Creación de servicio Recursos en paquete Servicios.</p>
+</div>
+
+<div align="center">
   <img  src="./resources/codigo11.png">
   <p>Creación de servicio Recursos.</p>
 </div>
