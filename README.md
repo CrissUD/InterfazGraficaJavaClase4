@@ -19,28 +19,28 @@ Curso propuesto por el grupo de trabajo Semana de Ingenio y Diseño (**SID**) de
 En nuestras anteriores clases hemos creado una clase **VistaPrincipalTemplate** y otra clase **LoginTemplate** cada una en su respectivo paquete como podemos ver a continuación:
 
 <div align="center">
-  <img  src="./resources/paquetes1.png">
+  <img  src="https://i.imgur.com/lvTuug9.png">
   <p>Clases UI en sus respectivos paquetes</p>
 </div>
 
 Ahora por motivos de modularidad vamos a crear un paquete llamado **client** y allí vamos a dejar nuestros paquetes de las clases UI que hemos creado. Nuestro archivo de ejecución App.java sigue estando ubicado en el paquete principal **app**.
 
 <div align="center">
-  <img  src="./resources/paquetes2.png">
+  <img  src="https://i.imgur.com/PMys9Rh.png">
   <p>Creación de paquete client que contiene nuestros paquetes creados previamente</p>
 </div>
 
 Recordando un poco nuestro recorrido, en nuestra primera clase habíamos creado nuestra clase **VistaPrincipalTemplate** que hasta el momento esta vacía:
 
 <div align="center">
-  <img  src="./resources/interfaz1.png">
+  <img  src="https://i.imgur.com/6r7acbV.png">
   <p>Vista principal creada en primera clase.</p>
 </div>
 
 También creamos nuestra clase **LoginTemplate** y el resultado de nuestra anterior clase fue el siguiente:
 
 <div align="center">
-  <img  src="./resources/interfaz2.png">
+  <img  src="https://i.imgur.com/FD2wbHw.png">
   <p>Login de usuario resultado anterior clase.</p>
 </div>
 
@@ -57,7 +57,7 @@ En esta clase vamos a ver 3 temas principales que nos ayudaran para que el códi
 Ya hemos creado nuestro login de usuario que se ve muy bien, sin embargo si en algún momento queremos cambiar una configuración en alguno de los objetos gráficos creados va ser algo complicado encontrar dicho objeto. Aunque nuestro código tiene algo de organización con la separación de la creación de cada uno de nuestros objetos gráficos, nuestro constructor tiene una gran cantidad de lineas de código.
 
 <div align="center">
-  <img  src="./resources/codigo1.png">
+  <img  src="https://i.imgur.com/a99Gvso.png">
   <p>Separación de creación de objetos gráficos dentro del constructor.</p>
 </div>
 
@@ -157,7 +157,7 @@ Hay que aclarar varias cosas aquí:
 Existe una excepción para la variable **iDimAux** encargada de redimensionar las imágenes, esta estará presente en los diferentes métodos de construcción ya que es una variable auxiliar y es necesario dejarla justo encima del objeto gráfico que la vaya a usar ya que esta variable estará cambiando constantemente con cada redimension nueva requerida.
 
 <div align="center">
-  <img  src="./resources/codigo17.png">
+  <img  src="https://i.imgur.com/X1LFbYS.png">
   <p>Excepción con variable auxiliar que estará presente en varios métodos de creación.</p>
 </div>
 
@@ -166,14 +166,14 @@ Existe una excepción para la variable **iDimAux** encargada de redimensionar la
 Como recordaremos, la declaración de nuestros objetos gráficos y objetos decoradores la realizamos de forma global al inicio de nuestra clase, haciendo de estos objetos atributos de nuestra clase. 
 
 <div align="center">
-  <img  src="./resources/atributos.png">
+  <img  src="https://i.imgur.com/3lTsBWQ.png">
   <p>Atributos de la clase LoginTemplate.</p>
 </div>
 
 Esto permite que cualquier entorno interno (Método) dentro de nuestra clase pueda conocer cada uno de estos objetos gráficos. Por ejemplo si en un caso hipotético se realizara la declaración de los paneles dentro del método **crearJPanels()** estos objetos gráficos solo existirían dentro de ese método y cuando se quiera agregar el JTextField creado en el método **crearJTextFields()** al panel **pDerecha** saltara un error por que para ese método el panel pDerecha no existe.
 
 <div align="center">
-  <img  src="./resources/codigo2.png">
+  <img  src="https://i.imgur.com/yHKYA9r.png">
   <p>Error al crear los paneles dentro de un solo entorno.</p>
 </div>
 
@@ -186,28 +186,28 @@ Aunque no todos nuestros objetos gráficos o decoradores tienen que ser atributo
 Si ya hemos pasado todos nuestros objetos gráficos y objetos Decoradores a sus respectivos métodos nuestro constructor se vera ahora así: 
 
 <div align="center">
-  <img  src="./resources/codigo3.png">
+  <img  src="https://i.imgur.com/GBuYAhg.png">
   <p>Constructor después de hacer los métodos de creación.</p>
 </div>
 
 Se puede notar que lo único que esta dentro de nuestro constructor es la configuración de nuestra ventana. Si corremos nuestra aplicación notamos que no se verá nada. 
 
 <div align="center">
-  <img  src="./resources/interfaz3.png">
+  <img  src="https://i.imgur.com/pVOvhEz.png">
   <p>Login de usuario después de hacer los métodos de creación.</p>
 </div>
 
 Esto es por que tenemos que llamar desde el constructor nuestros métodos de creación. Por ejemplo al llamar estos 4 métodos de creación : 
 
 <div align="center">
-  <img  src="./resources/codigo4.png">
+  <img  src="https://i.imgur.com/IaLF5AW.png">
   <p>Constructor después de hacer los métodos de creación.</p>
 </div>
 
 nuestra aplicación se vera así. 
 
 <div align="center">
-  <img  src="./resources/interfaz4.png">
+  <img  src="https://i.imgur.com/sEB2BD9.png">
   <p>Login de usuario con la llamada de algunos métodos de creación.</p>
 </div>
 
@@ -219,28 +219,28 @@ Tenemos que tener en cuenta la organización de los objetos con respecto al eje 
 * Si llamamos el método **crearJTextFields()** antes del método **crearJPanels()** ocurrirá un error por que no es posible añadir un objeto gráfico a un panel que aun no se ha creado.
 
 <div align="center">
-  <img  src="./resources/error1.png">
+  <img  src="https://i.imgur.com/0atJP3f.png">
   <p>Error por que no se ha creado los JPanel previamente.</p>
 </div>
 
 * Si llamamos el método **crearObjetosDecoradores()** después de llamar cualquier otro método que crea objetos gráficos en los que se incorpora objetos decoradores ocurrirá un error.
 
 <div align="center">
-  <img  src="./resources/error2.png">
+  <img  src="https://i.imgur.com/u3WGzsW.png">
   <p>Error por que no se ha creado los objetos decoradores previamente.</p>
 </div>
 
 * Si llamamos el método **crearJLabels()** antes de llamar el método de **crearJButtons()** el fondo del login tapara los botones en el panel **pIzquierda**.
 
 <div align="center">
-  <img  src="./resources/interfaz5.png">
+  <img  src="https://i.imgur.com/gPdBazV.png">
   <p>Los botones del panel pIzquierda no se ven por que están tapados por el fondo.</p>
 </div>
 
 Entonces es necesario que el programador tenga en cuenta la organización en la llamada de los métodos de creación. Una organización apropiada para nuestro caso puede ser:
 
 <div align="center">
-  <img  src="./resources/codigo5.png">
+  <img  src="https://i.imgur.com/gczbxCe.png">
   <p>Organización correcta en la llamada de los métodos de creación.</p>
 </div>
 
@@ -251,7 +251,7 @@ Nuestro código esta más organizado, cuando queramos cambiar la configuración 
 Ademas para poder concentrarnos aun mejor en una parte de nuestro código, el editor de texto nos da la posibilidad de minimizar el código por métodos y así concentrarnos en una sola parte de este.
 
 <div align="center">
-  <img  src="./resources/codigo6.png">
+  <img  src="https://i.imgur.com/MHlgwcn.png">
   <p>Minimización de código por métodos.</p>
 </div>
 
@@ -266,7 +266,7 @@ Una alternativa a esto es la creación de una clase que se encargue de proporcio
 Dentro de nuestro proyecto en el paquete raíz **app** ahora crearemos un nuevo paquete al cual llamaremos **services** y dentro crearemos una clase llamada **ObjGraficosService**.
 
 <div align="center">
-  <img  src="./resources/paquetes3.png">
+  <img  src="https://i.imgur.com/zEI9roS.png">
   <p>Creación de paquete services y servicio para la construcción de objetos gráficos.</p>
 </div>
 
@@ -383,27 +383,27 @@ this.add(pIzquierda);
 Note varias cosas importantes:
 * La creación de un JPanel se redujo de 6 lineas de código a solo 2.
 <div align="center">
-  <img  src="./resources/codigo7.png">
+  <img  src="https://i.imgur.com/f11pBhw.png">
   <p>Comparación de creación de un JPanel de forma habitual o con el servicio.</p>
 </div>
 
 * Nuestros nombres en los parámetros son muy intuitivos esto quiere decir que ya no tenemos que recordar el nombre exacto de cada método de configuración en el futuro si no que ya sabemos que debemos enviar.
 <div align="center">
-  <img  src="./resources/codigo8.png">
+  <img  src="https://i.imgur.com/PLHkCLV.png">
   <p>Parámetros intuitivos en la creación de nuestros objetos gráficos.</p>
 </div>
 
 * Si un objeto gráfico no contiene alguna propiedad que se pide en el método como es el ejemplo de un borde para nuestro panel simplemente se envía el argumento como **null**. 
 
 <div align="center">
-  <img  src="./resources/codigo9.png">
+  <img  src="https://i.imgur.com/Ey6fCmG.png">
   <p>Argumento de borde enviado como null ya que no se requiere en el panel.</p>
 </div>
 
 * Si considera que el código ocupa mucho espacio de forma horizontal puede acomodarlo a su preferencia:
 
 <div align="center">
-  <img  src="./resources/codigo10.png">
+  <img  src="https://i.imgur.com/mKAQRmm.png">
   <p>Otras formas de formatos del código.</p>
 </div>
 
@@ -506,34 +506,34 @@ Podemos observar lo siguiente en la creación de los dos anteriores botones:
 Debemos hacer uso del servicio para crear los otros botones en nuestra clase **LoginTemplate**. Si intentamos correr nuestra aplicación podemos verificar que corre perfectamente y se ve igual a como la teníamos, esto quiere decir que el servicio esta funcionando:
 
 <div align="center">
-  <img  src="./resources/interfaz7.png">
+  <img  src="https://i.imgur.com/OOamiHW.png">
   <p>Interfaz gráfica funcionando correctamente con la incorporación del servicio ObjGraficosService.</p>
 </div>
 
 El resto de métodos de nuestro servicio esta contenido dentro de este repositorio, puede observar todo el código  entrando a la carpeta **Clase4** luego a la carpeta **src/app** seguido de la carpeta **services** y entrando a la clase **objGraficosservice.java**. Allí usted podrá copiar los métodos que hacen falta y empezar a implementarlos desde la clase **LoginTemplate** para la optimización del código. 
      
 <div align="center">
-  <img  src="./resources/repositorio1.png">
+  <img  src="https://i.imgur.com/6uuKnyw.png">
   <p>Carpeta Clase4 dentro del repositorio.</p>
 </div>
 
 <div align="center">
-  <img  src="./resources/repositorio2.png">
+  <img  src="https://i.imgur.com/uCtHQzp.png">
   <p>Carpeta src/app dentro del repositorio.</p>
 </div>
 
 <div align="center">
-  <img  src="./resources/repositorio3.png">
+  <img  src="https://i.imgur.com/lVCC4N1.png">
   <p>Carpeta services dentro del repositorio.</p>
 </div>
 
 <div align="center">
-  <img  src="./resources/repositorio4.png">
+  <img  src="https://i.imgur.com/4ggxWx8.png">
   <p>Clase ObjGraficosService.java dentro del repositorio.</p>
 </div>
 
 <div align="center">
-  <img  src="./resources/repositorio5.png">
+  <img  src="https://i.imgur.com/DWxmPOY.png">
   <p>Código del servicio dentro del repositorio.</p>
 </div>
 
@@ -542,7 +542,7 @@ Una vez haya copiado todos los métodos de construcción en el servicio, este es
 **Nota:** Una particularidad que vale la pena recalcar es cuando creamos un JComboBox a traves del servicio, este recibirá un argumento llamado cadena que representa las diferentes opciones que contendrá el ComboBox y deberán enviarse separando cada una de las opciones con un **"_"** como se observa a continuación:
 
 <div align="center">
-  <img  src="./resources/codigo16.png">
+  <img  src="https://i.imgur.com/fhbxKO4.png">
   <p>Ejemplo creación JComboBox con el servicio.</p>
 </div>
 
@@ -557,12 +557,12 @@ Imaginen que por cada clase **template** que tengamos en un proyecto vamos a cre
 Vamos a crear otro servicio llamado **RecursosService** y realizaremos el mismo mecanismo de única ejemplificación explicada previamente.
 
 <div align="center">
-  <img  src="./resources/paquetes4.png">
+  <img  src="https://i.imgur.com/bRJrFdi.png">
   <p>Creación de servicio Recursos en paquete Servicios.</p>
 </div>
 
 <div align="center">
-  <img  src="./resources/codigo11.png">
+  <img  src="https://i.imgur.com/Nx8rOax.png">
   <p>Creación de servicio Recursos.</p>
 </div>
 
@@ -591,20 +591,20 @@ Vamos a mirar que objetos decoradores se pueden usar en varias clases **template
 Ahora vamos a realizar la creación de estos objetos decoradores en el servicio (los podemos crear dentro del constructor del servicio o en un método encargado de la creación de objetos decoradores dentro del servicio) y los borraremos de nuestra clases **LoginTemplate**:
 
 <div align="center">
-  <img  src="./resources/codigo13.png">
+  <img  src="https://i.imgur.com/v0fqj9J.png">
   <p>Objetos decoradores que se van a utilizar en varias partes del proyecto creados dentro del servicio.</p>
 </div>
 
 Note que el nombre de la variable **border** cambio a **borderInferiorAzul** esto ya que es muy probable que creemos más bordes en nuestro proyecto y necesitamos ser específicos con cada uno de nuestros objetos.
 
 <div align="center">
-  <img  src="./resources/codigo18.png">
+  <img  src="https://i.imgur.com/4EJmd2a.png">
   <p>Objetos decoradores que serán necesarios unicamente en la clase LoginTemplate.</p>
 </div>
 
 
 <div align="center">
-  <img  src="./resources/codigo12.png">
+  <img  src="https://i.imgur.com/ixFsbMc.png">
   <p>El método crearObjetosDecoradores de la clase LoginTemplate con solo los objetos decoradores necesarios unicamente en esa clase.</p>
 </div>
 
@@ -647,14 +647,14 @@ public ImageIcon getICerrar(){
 Nuestro servicio esta listo para ser usado. Ahora desde nuestra clase **LoginTemplate** cuando necesitemos uno de estos objetos decoradores solo llamaremos al servicio seguido del método **get** que necesitemos. Mostraremos un ejemplo de esto:
 
 <div align="center">
-  <img  src="./resources/codigo14.png">
+  <img  src="https://i.imgur.com/iRqg9SY.png">
   <p>Ejemplo de implementación de servicio de Recursos para obtener objetos decoradores compartidos entre clases.</p>
 </div>
 
 Se debe hacer esto con todos los objetos decoradores que eliminamos de la clase **LoginTemplate** y correr la aplicación para verificar que esta ocurriendo todo con normalidad.
 
 <div align="center">
-  <img  src="./resources/interfaz7.png">
+  <img  src="https://i.imgur.com/OOamiHW.png">
   <p>Interfaz gráfica funcionando correctamente con la incorporación del servicio RecursosService.</p>
 </div>
 
@@ -662,13 +662,13 @@ Se debe hacer esto con todos los objetos decoradores que eliminamos de la clase 
 Ahora si por ejemplo en nuestra clase **VistaPrincipalTemplate** necesitamos utilizar alguno de estos objetos decoradores como el color Azul para dejar el fondo de la ventana con ese color ahora llamaremos al servicio para obtenerlo:
 
 <div align="center">
-  <img  src="./resources/codigo15.png">
+  <img  src="https://i.imgur.com/2lGWovy.png">
   <p>Servicio Recursos utilizado en la clase VistaPrincipalTemplate para obtener el color azul.</p>
 </div>
 
 
 <div align="center">
-  <img  src="./resources/interfaz6.png">
+  <img  src="https://i.imgur.com/KPu7F12.png">
   <p>Ventana VistaPrincipalTemplate.</p>
 </div>
 
@@ -679,7 +679,7 @@ Ahora si por ejemplo en nuestra clase **VistaPrincipalTemplate** necesitamos uti
 Si alguno de nuestros métodos de creación hasta el momento queda demasiado largo es posible que sea difícil identificar donde esta cada objeto gráfico, una buena forma de dar un orden es mediante comentarios que servirán de títulos y guiás indicándonos donde esta cada objeto gráfico, esto no es obligatorio y personalmente es preferible usarlo en métodos de creación que quedan muy largos, en este caso se realizara para los métodos **crearJButtons** y **crearJLabels**:
 
 <div align='center'>
-    <img  src='./resources/codigo19.png'>
+    <img  src='https://i.imgur.com/Q7J2H0M.png'>
     <p>Creación de comentarios que guian la creación de objetos gráficos</p>
 </div>
 
