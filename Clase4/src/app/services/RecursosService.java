@@ -61,9 +61,8 @@ public class RecursosService {
     }
 
     public static RecursosService getService(){
-        if(servicio == null){
+        if(servicio == null)
             servicio = new RecursosService();
-        }
         return servicio;
     }
 }
