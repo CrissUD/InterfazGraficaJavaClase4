@@ -1,10 +1,17 @@
 package app;
 
+import javax.swing.SwingUtilities;
+
 import app.client.login.LoginTemplate;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        LoginTemplate vista = new LoginTemplate();
-        vista.setName("Login");
-    }
+  public static void main(String[] args) {
+    Runnable runApplication = new Runnable() {
+      public void run(){
+        LoginTemplate login = new LoginTemplate();
+        login.getClass();
+      }
+    };
+    SwingUtilities.invokeLater(runApplication);
+  }
 }

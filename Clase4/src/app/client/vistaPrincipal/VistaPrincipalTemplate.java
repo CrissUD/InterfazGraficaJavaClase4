@@ -5,21 +5,20 @@ import javax.swing.JFrame;
 import app.services.RecursosService;
 
 public class VistaPrincipalTemplate extends JFrame {
+  private static final long serialVersionUID = 1L;
+  
+  private RecursosService sRecursos;
 
-    private static final long serialVersionUID = 8914150529633029064L;
+  public VistaPrincipalTemplate() {
+    super("Vista Principal");
 
-    private RecursosService sRecursos;
+    sRecursos = RecursosService.getService();
 
-    public VistaPrincipalTemplate() {
-        super("Vista Principal");
-
-        sRecursos = RecursosService.getService();
-
-        getContentPane().setBackground(sRecursos.getColorAzul());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1200, 700);
-        setLocationRelativeTo(this);
-        setLayout(null);
-        setVisible(true);
-    }
+    getContentPane().setBackground(sRecursos.getColorAzul());
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    setSize(1200, 700);
+    setLocationRelativeTo(this);
+    setLayout(null);
+    setVisible(true);
+  }
 }
