@@ -533,7 +533,7 @@ Se debe hacer uso del servicio para crear los otros botones en la clase **LoginT
   <p>Interfaz gráfica funcionando correctamente con la incorporación del servicio ObjGraficosService.</p>
 </div>
 
-El resto de métodos del servicio esta contenido dentro de este repositorio, puede observar todo el código  entrando a la carpeta **Clase4** luego a la carpeta **src/app** seguido de la carpeta **services** y entrando a la clase **objGraficosservice.java**. Allí podrá ver una versión actualizada del servicio con su debida documentación para empezar a implementarlos desde la clase **LoginTemplate** y así realizar la optimización del código. 
+El resto de métodos del servicio esta contenido dentro de este repositorio, puede observar todo el código  entrando a la carpeta **Clase4** luego a la carpeta **src/app** seguido de la carpeta **services** y entrando a la clase **objGraficosService.java**. Allí podrá ver una versión actualizada del servicio con su debida documentación para empezar a implementarlos desde la clase **LoginTemplate** y así realizar la optimización del código. 
      
 <div align="center">
   <img  src="https://i.imgur.com/6uuKnyw.png">
@@ -556,13 +556,20 @@ El resto de métodos del servicio esta contenido dentro de este repositorio, pue
 </div>
 
 <div align="center">
-  <img  src="https://i.imgur.com/DWxmPOY.png">
+  <img  src="https://i.imgur.com/9XaHnTE.png">
   <p>Código del servicio dentro del repositorio.</p>
 </div>
 
-Una vez haya copiado todos los métodos de construcción en el servicio, este estará listo para usarse en todas las clases **template** que creemos posteriormente. Este servicio podrá usarse también en todos sus proyectos frontend para hacer más fácil la creación de objetos gráficos. Recuerde que cuando tenga el servicio completo podrá usarlo en la clase **loginTemplate** para la construcción de todos los objetos gráficos y probar que todo esta bien corriendo la aplicación.
+***Nota:** Usted puede crear el servicio por su cuenta, sin embargo, la versión proporcionada en el repositorio le sera util ya que esta actualizada y además la documentación de este aporta un soporte adicional cuando se usen los métodos. A continuación se muestra como:*
 
-**Nota:** Una particularidad que vale la pena recalcar es cuando creamos un JComboBox a traves del servicio, este recibirá un argumento llamado cadena que representa las diferentes opciones que contendrá el ComboBox y deberán enviarse separando cada una de las opciones con un **"_"** como se observa a continuación:
+<div align='center'>
+    <img  src='https://i.imgur.com/xt7aXUU.png'>
+    <p>Documentación como soporte al usar el servicio.</p>
+</div>
+
+Una vez haya completado todo el servicio, este estará listo para usarse en todas las clases **template** que se creen posteriormente. Este servicio podrá usarse también en todos sus proyectos frontend para hacer más fácil la creación de objetos gráficos. Recuerde que cuando tenga el servicio completo podrá usarlo en la clase **loginTemplate** para la construcción de todos los objetos gráficos y probar que todo esta bien corriendo la aplicación.
+
+**Nota:** Una particularidad que vale la pena recalcar es cuando se crea un **JComboBox** a traves del servicio, este recibirá un argumento llamado cadena que representa las diferentes opciones que contendrá el ComboBox y deberán enviarse separando cada una de las opciones con un **"_"** como se observa a continuación:
 
 <div align="center">
   <img  src="https://i.imgur.com/fhbxKO4.png">
@@ -571,13 +578,13 @@ Una vez haya copiado todos los métodos de construcción en el servicio, este es
 
 # Optimización de recursos
 
-Si ya hemos llegado hasta aquí hemos realizado una moduralización del código y ademas  una optimización de este. Pero aun podemos dar un paso más, vamos a ver la optimización de recursos. Esto intenta resolver la creación desproporcionada de objetos que estaremos creando en las clases UI. 
+Hasta este punto se ha realizado una moduralización del código y ademas  una optimización de este. Pero es posible dar un paso más, en esta sección se explica la optimización de recursos. Esto intenta resolver la creación desproporcionada de objetos que estaremos creando en las clases UI. 
 
-Tenemos que hallar una forma de controlar la creación de objetos que muy posiblemente usemos en varias clases. Por ejemplo los objetos decoradores son muy propensos a ser utilizados en diferentes clases. Es muy posible que el cursor que creamos para pasar sobre los botones lo usemos también en otras clases que tengan botones. El color Azul muy posiblemente lo usemos en la clase **VistaPrincipalTemplate** y en muchas otras más. 
+Se debe hallar una forma de controlar la creación de objetos que muy posiblemente se usen en varias clases. Por ejemplo los objetos decoradores son muy propensos a ser utilizados en diferentes partes del proyecto. Por ejemplo, es probable que el cursor que se usa para pasar sobre los botones del login sea usado también en otras clases que tengan botones también. El color Azul posiblemente se usará en la clase **VistaPrincipalTemplate** y en muchas otras más. 
 
-Imaginen que por cada clase **template** que tengamos en un proyecto vamos a crear un objeto para el cursor o varios objetos para usar las mismas fuentes, colores, bordes o imágenes. La cantidad de recursos en memoria sería exorbitante.
+Imagine que por cada clase **template** dentro del proyecto se crea un objeto nuevo para el cursor de mano que pasa sobre los botones o varios objetos para usar las mismas fuentes, colores, bordes o imágenes. La cantidad de recursos en memoria sería exorbitante.
 
-Vamos a crear otro servicio llamado **RecursosService** y realizaremos el mismo mecanismo de única ejemplificación explicada previamente.
+Se va a crear a continuación otro servicio llamado **RecursosService** y se realiza el mismo mecanismo de única ejemplificación explicada previamente.
 
 <div align="center">
   <img  src="https://i.imgur.com/bRJrFdi.png">
@@ -589,7 +596,7 @@ Vamos a crear otro servicio llamado **RecursosService** y realizaremos el mismo 
   <p>Creación de servicio Recursos.</p>
 </div>
 
-Ahora en la clase **loginTemplate** debemos igualmente obtener el objeto de este servicio:
+Ahora en la clase **loginTemplate** se debe igualmente obtener el objeto de este servicio:
 
 **importación**
 ```javascript
@@ -599,90 +606,80 @@ import app.services.RecursosService;
 ```javascript
 private RecursosService sRecursos;
 ```
-**obtención de ejemplificación**
+**obtención de servicio**
 ```javascript
 sRecursos = RecursosService.getService();
 ```
-Vamos a mirar que objetos decoradores se pueden usar en varias clases **template**:
+Veamos que objetos decoradores se pueden usar en varias clases **template**:
 
 * El cursor de mano para los botones seguramente se use en varias clases que tengan botones.
 * Los colores también se usaran en varias partes del proyecto, es común que un proyecto entero de Interfaz Gráfica de usuario maneje una gama especifica de colores.
-* Las fuentes se usaran claramente en otras clases, no todas las fuentes se usaran en todo el proyecto podrían existir unas particulares en una clase pero es bueno manejar una tipografía común en todas las interfaces del proyecto.
-* El borde azul en la parte inferior es probable que lo usemos en otras clases que contengan JTextField.
-* La imagen de cerrar ventana se podría volver a utilizar en la Vista principal.
+* Las fuentes se usaran claramente en otras clases, no todas las fuentes se usaran en todo el proyecto podrían existir unas particulares en una clase pero es bueno manejar una tipografía común en todas las interfaces de un mismo proyecto.
+* El borde azul en la parte inferior es probable que se utilice en otras clases que contengan JTextField.
+* La imágen de cerrar ventana se podría volver a utilizar en la Vista principal.
 
-Ahora vamos a realizar la creación de estos objetos decoradores en el servicio (los podemos crear dentro del constructor del servicio o en un método encargado de la creación de objetos decoradores dentro del servicio) y los borraremos de la clases **LoginTemplate**:
+Ahora se va a realizar la creación de estos objetos decoradores en el servicio (se pueden crear dentro del constructor del servicio o modularizar por métodos encargados de la creación de objetos decoradores dentro del servicio). Una vez estos estan creados en el servicio se pueden borrar en la clase **LoginTemplate**:
 
 <div align="center">
-  <img  src="https://i.imgur.com/v0fqj9J.png">
-  <p>Objetos decoradores que se van a utilizar en varias partes del proyecto creados dentro del servicio.</p>
+  <img  src="https://i.imgur.com/sKof3eT.png">
+  <p>Objetos decoradores que se pueden a utilizar en varias partes del proyecto creados dentro del servicio.</p>
 </div>
 
-Note que el nombre de la variable **border** cambio a **borderInferiorAzul** esto ya que es muy probable que creemos más bordes en el proyecto y necesitamos ser específicos con cada uno de los objetos.
+Por otro lado el método que se encarga de generar las fuentes puede ir dentro del servicio ya que este al encargarse primordialmente de objetos decoradores debe también encargarse de temas como estos y como se ve en la anterior imágen este debe ser el primer método en ser llamado para asegurar la visualización de las fuentes:
+
+<div align='center'>
+    <img  src='https://i.imgur.com/RX7z9Jl.png'>
+    <p>Método encargado del registro de fuentes dentro del servicio recursos.</p>
+</div>
+
+Por otro lado dentro de la clase LoginService ahora solo se tienen estos objetos decoradores:
 
 <div align="center">
-  <img  src="https://i.imgur.com/4EJmd2a.png">
+  <img  src="https://i.imgur.com/JEGeYIl.png">
   <p>Objetos decoradores que serán necesarios unicamente en la clase LoginTemplate.</p>
 </div>
 
 
 <div align="center">
-  <img  src="https://i.imgur.com/ixFsbMc.png">
+  <img  src="https://i.imgur.com/DvZswq1.png">
   <p>El método crearObjetosDecoradores de la clase LoginTemplate con solo los objetos decoradores necesarios unicamente en esa clase.</p>
 </div>
 
-Ahora para que cualquier clase **template** pueda obtener estos objetos decoradores a traves del servicio necesitamos crear unos métodos **get** que nos retornen estos objetos:
+Ahora para que cualquier clase **template** pueda obtener los objetos decoradores a traves del servicio es necesario crear unos métodos **get** que retornen estos objetos:
 
 ```javascript
-public Color getColorAzul(){
-    return colorAzul;
-}
+public Color getColorAzul(){ return colorAzul; }
 
-public Color getColorGrisOscuro(){
-    return colorGrisOscuro;
-}
+public Color getColorGrisOscuro(){ return colorGrisOscuro; }
 
-public Font getFontTPrincipal(){
-    return fontTPrincipal;
-}
+public Font getFontTPrincipal(){ return fontTPrincipal; }
 
-public Font getFontTitulo(){
-    return fontTitulo;
-}
+public Font getFontTitulo(){ return fontTitulo; }
 
-public Font getFontSubtitulo(){
-    return fontSubtitulo;
-}
+public Font getFontSubtitulo(){ return fontSubtitulo; }
 
-public Cursor getCMano(){
-    return cMano;
-}
+public Cursor getCMano(){ return cMano; }
 
-public Border getBorderInferiorAzul(){
-    return borderInferiorAzul;
-}
+public Border getBorderInferiorAzul(){ return borderInferiorAzul; }
 
-public ImageIcon getICerrar(){
-    return iCerrar;
-}
+public ImageIcon getICerrar(){ return iCerrar; }
 ```
 
-El servicio esta listo para ser usado. Ahora desde la clase **LoginTemplate** cuando necesitemos uno de estos objetos decoradores solo llamaremos al servicio seguido del método **get** que necesitemos. Mostraremos un ejemplo de esto:
+El servicio esta listo para ser usado. Ahora desde la clase **LoginTemplate** cuando se necesite uno de estos objetos decoradores solo se llama al servicio seguido del método **get** que se necesite. A continuación un ejemplo de esto:
 
 <div align="center">
-  <img  src="https://i.imgur.com/iRqg9SY.png">
+  <img  src="https://i.imgur.com/bckKG40.png">
   <p>Ejemplo de implementación de servicio de Recursos para obtener objetos decoradores compartidos entre clases.</p>
 </div>
 
-Se debe hacer esto con todos los objetos decoradores que eliminamos de la clase **LoginTemplate** y correr la aplicación para verificar que esta ocurriendo todo con normalidad.
+Se debe hacer esto con todos los objetos decoradores que necesarios de la clase **LoginTemplate** y correr la aplicación para verificar que esta ocurriendo todo con normalidad.
 
 <div align="center">
   <img  src="https://i.imgur.com/OOamiHW.png">
   <p>Interfaz gráfica funcionando correctamente con la incorporación del servicio RecursosService.</p>
 </div>
 
-
-Ahora si por ejemplo en la clase **VistaPrincipalTemplate** necesitamos utilizar alguno de estos objetos decoradores como el color Azul para dejar el fondo de la ventana con ese color ahora llamaremos al servicio para obtenerlo:
+Ahora si por ejemplo en la clase **VistaPrincipalTemplate** es necesario utilizar alguno de estos objetos decoradores como el color Azul para dejar el fondo de la ventana con ese color simplemente basta con llamar al servicio para obtenerlo:
 
 <div align="center">
   <img  src="https://i.imgur.com/2lGWovy.png">
@@ -695,23 +692,23 @@ Ahora si por ejemplo en la clase **VistaPrincipalTemplate** necesitamos utilizar
   <p>Ventana VistaPrincipalTemplate.</p>
 </div>
 
- Aunque el objeto decorador **colorAzul** se ve reflejado en dos clases distintas solo existe una vez en memoria. De igual forma el servicio **RecursosService** solo existirá una vez en memoria sin importar en cuantas clases lo llamen.
+ Aunque el objeto decorador **colorAzul** se ve reflejado en dos ventanas distintas solo existe una vez en memoria. De igual forma el servicio **RecursosService** solo existirá una vez en memoria sin importar en cuantas clases sea llamado.
 
 # Orden adicional
 
-Si alguno de los métodos de creación hasta el momento queda demasiado largo es posible que sea difícil identificar donde esta cada objeto gráfico, una buena forma de dar un orden es mediante comentarios que servirán de títulos y guiás indicándonos donde esta cada objeto gráfico, esto no es obligatorio y personalmente es preferible usarlo en métodos de creación que quedan muy largos, en este caso se realizara para los métodos **crearJButtons** y **crearJLabels**:
+Si alguno de los métodos de creación hasta el momento queda demasiado largo es posible que sea difícil identificar donde esta cada objeto gráfico, una buena forma de dar un orden adicional es mediante comentarios que servirán de títulos y guiás indicándo donde esta cada objeto gráfico, esto no es obligatorio y es preferible usarlo en métodos de creación que quedan muy largos, en este caso se realizara para los métodos **crearJButtons** y **crearJLabels**:
 
 <div align='center'>
     <img  src='https://i.imgur.com/Q7J2H0M.png'>
-    <p>Creación de comentarios que guian la creación de objetos gráficos</p>
+    <p>Creación de comentarios que guían la creación de objetos gráficos</p>
 </div>
 
 # Resultado
 
-Si has llegado hasta aquí **!Felicidades!** ahora no solo tienes una interfaz gráfica agradable para el usuario, también tienes un código mucho más organizado, modularizado, optimizado, responsable con los recursos y mantenible.
+Si has llegado hasta aquí **!Felicidades!** ahora no solo se tiene una interfaz gráfica agradable para el usuario, también se tiene un código mucho más organizado, modularizado, optimizado, responsable con los recursos y mantenible.
 
-En la siguiente clase vamos a revisar el concepto de Componente gráfico y su importancia en la creación de interfaces gráfica con proyectos grandes. También nos introduciremos a los eventos empezando con los eventos básicos de botones.
+En la siguiente clase se va a revisar el concepto de **Componente gráfico** y su importancia en la creación de interfaces gráfica con proyectos grandes. También se se introducirá a los eventos empezando con los eventos básicos de acción.
 
 # Actividad
 
-Implementa los servicios de creación de objetos gráficos y de recursos para agregar optimización de código y recursos en sus Login propios.  Ademas de realizar modularizacion en el código.
+Implementar los servicios de construcción de objetos gráficos y de recursos para agregar optimización de código y recursos en los Login propios.  Ademas de realizar modularizacion en el código.
