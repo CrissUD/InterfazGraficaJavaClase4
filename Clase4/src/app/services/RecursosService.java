@@ -86,8 +86,7 @@ public class RecursosService {
   public ImageIcon getICerrar() { return iCerrar; }
 
   public static RecursosService getService() {
-    if (servicio == null)
-      servicio = new RecursosService();
+    if (servicio == null) servicio = new RecursosService();
     return servicio;
   }
 }
