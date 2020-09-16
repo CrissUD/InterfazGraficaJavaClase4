@@ -16,6 +16,7 @@ Curso propuesto por el grupo de trabajo Semana de Ingenio y Diseño (**SID**) de
 
 # Antes de comenzar
 
+### **Ajustes en el proyecto**
 En las anteriores sesiones se han creado las clases **VistaPrincipalTemplate** y **LoginTemplate** cada una en su respectivo paquete como se puede ver a continuación:
 
 <div align="center">
@@ -29,6 +30,8 @@ Ahora por motivos de modularidad se crea un paquete llamado **client** y allí s
   <img  src="https://i.imgur.com/1ToVlXl.png">
   <p>Creación de paquete client que contiene los paquetes creados previamente</p>
 </div>
+
+### **Recordatorio**
 
 Recordando un poco el recorrido del curso, en la primera sesión se había creado la clase **VistaPrincipalTemplate** que hasta el momento esta vacía:
 
