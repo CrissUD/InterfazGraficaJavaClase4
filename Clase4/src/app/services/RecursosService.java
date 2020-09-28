@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 
 public class RecursosService {
 
-  private Color colorAzul, colorGrisOscuro;
+  private Color colorPrincipal, colorGrisOscuro;
   private Font fontTPrincipal, fontTitulo, fontSubtitulo, fontMediana;
   private Cursor cMano;
   private Border bInferiorAzul;
@@ -34,7 +34,7 @@ public class RecursosService {
   }
 
   private void crearColores() {
-    colorAzul = new Color(60, 78, 120);
+    colorPrincipal = new Color(60, 78, 120);
     colorGrisOscuro = new Color(80, 80, 80);
   }
 
@@ -48,7 +48,7 @@ public class RecursosService {
   private void crearCursores() { cMano = new Cursor(Cursor.HAND_CURSOR); }
 
   private void crearBordes() {
-    bInferiorAzul = BorderFactory.createMatteBorder(0, 0, 2, 0, colorAzul);
+    bInferiorAzul = BorderFactory.createMatteBorder(0, 0, 2, 0, colorPrincipal);
   }
 
   private void crearImagenes() {
@@ -67,7 +67,7 @@ public class RecursosService {
     }
   }
 
-  public Color getColorAzul() { return colorAzul; }
+  public Color getColorPrincipal() { return colorPrincipal; }
 
   public Color getColorGrisOscuro() { return colorGrisOscuro; }
 

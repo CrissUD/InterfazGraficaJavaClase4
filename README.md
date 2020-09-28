@@ -91,7 +91,7 @@ public void crearJTextFields(){
   tNombreUsuario = new JTextField("Nombre Usuario");
   tNombreUsuario.setSize(260, 40);
   tNombreUsuario.setLocation((pDerecha.getWidth() - tNombreUsuario.getWidth()) / 2, 130);
-  tNombreUsuario.setForeground(colorAzul);
+  tNombreUsuario.setForeground(colorPrincipal);
   tNombreUsuario.setBackground(Color.WHITE);
   tNombreUsuario.setCaretColor(colorGrisOscuro);
   tNombreUsuario.setBorder(bInferiorAzul);
@@ -102,14 +102,14 @@ public void crearJTextFields(){
 Otro método podría ser el de **crearObjetosDecoradores** donde se inserta la creación de todos los objetos de este tipo:
 ```javascript
 public void crearObjetosDecoradores(){
-  colorAzul = new Color(60, 78, 120);
+  colorPrincipal = new Color(60, 78, 120);
   colorGrisOscuro = new Color(80, 80, 80);
   fontTPrincipal = new Font("Rockwell Extra Bold", Font.PLAIN, 20);
   fontTitulo = new Font("Calibri (Cuerpo)", Font.BOLD, 17);
   fontSubtitulo = new Font("Forte", Font.PLAIN, 13);
   fontMediana = new Font("LuzSans-Book", Font.PLAIN, 15);
   cMano = new Cursor(Cursor.HAND_CURSOR);
-  bInferiorAzul = BorderFactory.createMatteBorder(0, 0, 2, 0, colorAzul);
+  bInferiorAzul = BorderFactory.createMatteBorder(0, 0, 2, 0, colorPrincipal);
   iFondo = new ImageIcon("Clase4/resources/images/fondo.png");
   iLogo = new ImageIcon("Clase4/resources/images/logo.png");
   iUsuario2 = new ImageIcon("Clase4/resources/images/usuario2.png");
@@ -157,7 +157,7 @@ Una vez realizada la modularización, vale la pena aclarar varias aspectos:
 Existe una excepción para el objeto decorador **iDimAux** encargado de redimensionar las imágenes, este estará presente en los diferentes métodos de construcción respectiva al objeto gráfico al que se va a incorporar, ya que es un objeto auxiliar y es necesario dejarlo justo encima del objeto gráfico al que se incorpora, porque que esta variable estará cambiando constantemente con cada redimension nueva requerida.
 
 <div align="center">
-  <img  src="https://i.imgur.com/X1LFbYS.png">
+  <img  src="https://i.imgur.com/1lF86XA.png">
   <p>Excepción con el objeto auxiliar que estará presente en varios métodos de creación.</p>
 </div>
 
@@ -173,7 +173,7 @@ Como se vio en las anteriores lecciones, la declaración de los objetos gráfico
 Esto permite que cualquier entorno interno (Método) dentro de la clase pueda conocer cada uno de estos objetos gráficos. Por ejemplo si en un caso hipotético se realizara la declaración de los paneles dentro del método **crearJPanels()** estos objetos gráficos solo existirían dentro de ese método y cuando se quiera agregar el JTextField creado en el método **crearJTextFields()** al panel **pDerecha** saltará un error porque para ese método el panel pDerecha no existe.
 
 <div align="center">
-  <img  src="https://i.imgur.com/yHKYA9r.png">
+  <img  src="https://i.imgur.com/yhTLBKs.png">
   <p>Error al declarar los paneles dentro de un solo entorno.</p>
 </div>
 
@@ -251,7 +251,7 @@ El código esta más organizado, cuando se quiera cambiar la configuración de a
 Ademas para poder concentrarse aun mejor en una parte del código, el editor de texto da la posibilidad de minimizar el código por métodos y así enfocarse en una sola parte de este.
 
 <div align="center">
-  <img  src="https://i.imgur.com/MHlgwcn.png">
+  <img  src="https://i.imgur.com/QP9BuXz.png">
   <p>Minimización de código por métodos.</p>
 </div>
 
@@ -486,7 +486,7 @@ bEntrar = sObjGraficos.construirJButton(
   (pDerecha.getWidth() - 250) / 2, 330, 250, 45, 
   cMano, 
   null, null, 
-  colorAzul, 
+  colorPrincipal, 
   Color.WHITE, 
   null, 
   "c", 
@@ -495,8 +495,8 @@ bEntrar = sObjGraficos.construirJButton(
 pDerecha.add(bEntrar);
 
 iDimAux = new ImageIcon(
-    iCerrar.getImage()
-      .getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
+  iCerrar.getImage()
+    .getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING)
 );
 
 bCerrar = sObjGraficos.construirJButton(
@@ -575,7 +575,7 @@ Una vez haya completado todo el servicio, este estará listo para usarse en toda
 **Nota:** Una particularidad que vale la pena recalcar es cuando se crea un **JComboBox** a traves del servicio, este recibirá un argumento llamado cadena que representa las diferentes opciones que contendrá el ComboBox y deberán enviarse separando cada una de las opciones con un **"_"** como se observa a continuación:
 
 <div align="center">
-  <img  src="https://i.imgur.com/fhbxKO4.png">
+  <img  src="https://i.imgur.com/AY4K0oq.png">
   <p>Ejemplo creación JComboBox con el servicio.</p>
 </div>
 
@@ -583,7 +583,7 @@ Una vez haya completado todo el servicio, este estará listo para usarse en toda
 
 Hasta este punto se ha realizado una moduralización del código y ademas  una optimización de este. Pero es posible dar un paso más, en esta sección se explica la optimización de recursos. Esto intenta resolver la creación desproporcionada de objetos que estaremos creando en las clases UI. 
 
-Se debe hallar una forma de controlar la creación de objetos que muy posiblemente se usen en varias clases. Por ejemplo los objetos decoradores son muy propensos a ser utilizados en diferentes partes del proyecto. Por ejemplo, es probable que el cursor que se usa para pasar sobre los botones del login sea usado también en otras clases que tengan botones también. El color Azul posiblemente se usará en la clase **VistaPrincipalTemplate** y en muchas otras más. 
+Se debe hallar una forma de controlar la creación de objetos que muy posiblemente se usen en varias clases. Por ejemplo los objetos decoradores son muy propensos a ser utilizados en diferentes partes del proyecto. Por ejemplo, es probable que el cursor que se usa para pasar sobre los botones del login sea usado también en otras clases que tengan botones también. El color principal posiblemente se usará en la clase **VistaPrincipalTemplate** y en muchas otras más. 
 
 Imagine que por cada clase **template** dentro del proyecto se crea un objeto nuevo para el cursor de mano que pasa sobre los botones o varios objetos para usar las mismas fuentes, colores, bordes o imágenes. La cantidad de recursos en memoria sería exorbitante.
 
@@ -624,7 +624,7 @@ Veamos que objetos decoradores se pueden usar en varias clases **template**:
 Ahora se va a realizar la creación de estos objetos decoradores en el servicio (se pueden crear dentro del constructor del servicio o modularizar por métodos encargados de la creación de objetos decoradores dentro del servicio). Una vez estos estan creados en el servicio se pueden borrar en la clase **LoginTemplate**:
 
 <div align="center">
-  <img  src="https://i.imgur.com/sKof3eT.png">
+  <img  src="https://i.imgur.com/4xhe7GL.png">
   <p>Objetos decoradores que se pueden a utilizar en varias partes del proyecto creados dentro del servicio.</p>
 </div>
 
@@ -651,7 +651,7 @@ Por otro lado dentro de la clase LoginService ahora solo se tienen estos objetos
 Ahora para que cualquier clase **template** pueda obtener los objetos decoradores a traves del servicio es necesario crear unos métodos **get** que retornen estos objetos:
 
 ```javascript
-public Color getColorAzul(){ return colorAzul; }
+public Color getColorPrincipal(){ return colorPrincipal; }
 
 public Color getColorGrisOscuro(){ return colorGrisOscuro; }
 
@@ -671,7 +671,7 @@ public ImageIcon getICerrar(){ return iCerrar; }
 El servicio esta listo para ser usado. Ahora desde la clase **LoginTemplate** cuando se necesite uno de estos objetos decoradores solo se llama al servicio seguido del método **get** que se necesite. A continuación un ejemplo de esto:
 
 <div align="center">
-  <img  src="https://i.imgur.com/bckKG40.png">
+  <img  src="https://i.imgur.com/gakj8G5.png">
   <p>Ejemplo de implementación de servicio de Recursos para obtener objetos decoradores compartidos entre clases.</p>
 </div>
 
@@ -682,11 +682,11 @@ Se debe hacer esto con todos los objetos decoradores que necesarios de la clase 
   <p>Interfaz gráfica funcionando correctamente con la incorporación del servicio RecursosService.</p>
 </div>
 
-Ahora si por ejemplo en la clase **VistaPrincipalTemplate** es necesario utilizar alguno de estos objetos decoradores como el color Azul para dejar el fondo de la ventana con ese color simplemente basta con llamar al servicio para obtenerlo:
+Ahora si por ejemplo en la clase **VistaPrincipalTemplate** es necesario utilizar alguno de estos objetos decoradores como el color principal para dejar el fondo de la ventana con ese color simplemente basta con llamar al servicio para obtenerlo:
 
 <div align="center">
-  <img  src="https://i.imgur.com/2lGWovy.png">
-  <p>Servicio Recursos utilizado en la clase VistaPrincipalTemplate para obtener el color azul.</p>
+  <img  src="https://i.imgur.com/zm2j2lX.png">
+  <p>Servicio Recursos utilizado en la clase VistaPrincipalTemplate para obtener el color principal.</p>
 </div>
 
 
@@ -695,7 +695,7 @@ Ahora si por ejemplo en la clase **VistaPrincipalTemplate** es necesario utiliza
   <p>Ventana VistaPrincipalTemplate.</p>
 </div>
 
- Aunque el objeto decorador **colorAzul** se ve reflejado en dos ventanas distintas solo existe una vez en memoria. De igual forma el servicio **RecursosService** solo existirá una vez en memoria sin importar en cuantas clases sea llamado.
+ Aunque el objeto decorador **colorPrincipal** se ve reflejado en dos ventanas distintas solo existe una vez en memoria. De igual forma el servicio **RecursosService** solo existirá una vez en memoria sin importar en cuantas clases sea llamado.
 
 # Orden adicional
 

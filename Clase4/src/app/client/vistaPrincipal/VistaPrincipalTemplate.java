@@ -14,7 +14,7 @@ public class VistaPrincipalTemplate extends JFrame {
 
     sRecursos = RecursosService.getService();
 
-    getContentPane().setBackground(sRecursos.getColorAzul());
+    getContentPane().setBackground(sRecursos.getColorPrincipal());
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setSize(1200, 700);
     setLocationRelativeTo(this);
